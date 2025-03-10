@@ -537,7 +537,7 @@
                 <div class="col-12 wow fadeInUp">
                   <textarea class="form-control" id="message" name="Message" rows="6" placeholder="Enter message here.."></textarea>
                 </div>
-                <button type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
+                <button onclick="AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
               </div>
             </form>
           </div>
@@ -627,6 +627,39 @@
   <script src="assets/js/minibar-virtual.js"></script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIA_zqjFMsJM_sxP9-6Pde5vVCTyJmUHM&callback=initMap"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+
+    function AddMessage(event)
+    {
+      event.preventDefault();
+      var oneMessage = {};
+      oneMessage.name = document.getElementById("name").value;
+      oneMessage.email = document.getElementById("email").value;
+      oneMessage.subject = document.getElementById("subject").value;
+      oneMessage.message = document.getElementById("message").value;
+      google.script.run.withSuccessHandler(AddMessage).withFailureHandler(ErrorCheck).SaveContactCV(oneMessage);
+    }
+
+    function AddMessage(response){
+      if(response){
+        Swal.fire({
+          icon: "success",
+          title: "Send Message Successfulled !",
+          text: "Your message have been sent, please! wait for me around 24h. I will contact you imediately.",
+        });
+      }else {
+        Swal.fire({
+          icon: "error",
+          title: "Send Message Failed !",
+          text: "Send message have a problem, please! try again later.",
+        });
+      }
+    }
+    
+  </script>
 
 </body>
 </html>
