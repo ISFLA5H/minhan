@@ -537,7 +537,7 @@
                 <div class="col-12 wow fadeInUp">
                   <textarea class="form-control" id="message" name="Message" rows="6" placeholder="Enter message here.."></textarea>
                 </div>
-                <button onclick="return AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
+                <button id="submitMessage" onclick="return AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
               </div>
             </form>
           </div>
@@ -631,21 +631,35 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-
-    function AddMessage(event)
-    {
+    document.getElementById("submitMessage").addEventListener("click", function(event) {
       event.preventDefault();
-      return false;
-      var dataRequest = {};
-      dataRequest.name = document.getElementById("name").value;
-      dataRequest.email = document.getElementById("email").value;
-      dataRequest.subject = document.getElementById("subject").value;
-      dataRequest.message = document.getElementById("message").value;
-      google.script.run.withSuccessHandler(AddMessage).withFailureHandler(ErrorCheck).SaveContactCV(dataRequest);
-    }
+      
+      // Dữ liệu bạn muốn gửi (ví dụ, chuỗi cần cập nhật)
+      const dataRequest = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value;
+      };
+        alert(dataRequest.email);
+    });
 
-    function AddMessage(response){
-      if(response){
+
+    async function sendDataToGoogleAppScript(data) {
+  const url = 'https://script.google.com/macros/s/AKfycbwrCLVTvF88bAkiUckDzAw3HetN6pPWwjrxm3qm52w8ZrSgun6HTNHV2yrD749rPTLAjg/exec';  // URL Web App của bạn
+  
+  // Gửi yêu cầu HTTP POST với dữ liệu dưới dạng JSON
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'  // Đảm bảo nội dung là JSON
+    },
+    body: JSON.stringify(data)  // Chuyển đổi dữ liệu thành chuỗi JSON
+  });
+
+  const result = await response;  // Nhận phản hồi từ Google Apps Script
+  console.log(result);  // Hiển thị kết quả
+      if(result){
         Swal.fire({
           icon: "success",
           title: "Send Message Successfulled !",
@@ -658,7 +672,18 @@
           text: "Send message have a problem, please! try again later.",
         });
       }
-    }
+}
+    // function AddMessage(event)
+    // {
+    //   event.preventDefault();
+    //   return false;
+    //   var dataRequest = {};
+    //   dataRequest.name = document.getElementById("name").value;
+    //   dataRequest.email = document.getElementById("email").value;
+    //   dataRequest.subject = document.getElementById("subject").value;
+    //   dataRequest.message = document.getElementById("message").value;
+    //   google.script.run.withSuccessHandler(AddMessage).withFailureHandler(ErrorCheck).SaveContactCV(dataRequest);
+    // }
     
   </script>
 
