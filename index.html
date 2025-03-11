@@ -634,7 +634,7 @@
     document.getElementById("submitMessage").addEventListener("click", function(event) {
       event.preventDefault();
       const nameField = document.getElementById("name").value;
-      if (nameField.validity.valueMissing) {
+      if (nameField.validity=="") {
         nameField.setCustomValidity("Name is required");
       }
       // Dữ liệu bạn muốn gửi (ví dụ, chuỗi cần cập nhật)
