@@ -537,7 +537,7 @@
                 <div class="col-12 wow fadeInUp">
                   <textarea class="form-control" id="message" name="Message" rows="6" placeholder="Enter message here.."></textarea>
                 </div>
-                <button id="submitMessage" onclick="return AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
+                <button id="submitMessage" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
               </div>
             </form>
           </div>
@@ -633,10 +633,13 @@
   <script>
     document.getElementById("submitMessage").addEventListener("click", function(event) {
       event.preventDefault();
-      
+      const nameField = document.getElementById("name").value;
+      if (nameField.validity.valueMissing) {
+        nameField.setCustomValidity("Name is required");
+      }
       // Dữ liệu bạn muốn gửi (ví dụ, chuỗi cần cập nhật)
       const dataRequest = {
-        name: document.getElementById("name").value,
+        name: nameField,
         email: document.getElementById("email").value,
         subject: document.getElementById("subject").value,
         message: document.getElementById("message").value,
