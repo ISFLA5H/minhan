@@ -686,17 +686,22 @@
     //   mode: "cors" // Ensure CORS is handled properly
     // }).then(response => response.json()).then(result => console.log(result)).catch(error => console.error("Error:", error));
 
-  fetch("https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec", {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-        'Content-Type': 'application/json',
-    }
-}).then(response => {
-    console.log("success:", response);
-}).catch(err => {
-    console.log("Error:" + err);
-});
+//   fetch("https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec", {
+//     method: 'POST',
+//     body: JSON.stringify(data),
+//     headers: {
+//         'Content-Type': 'application/json',
+//     }
+// }).then(response => {
+//     console.log("success:", response);
+// }).catch(err => {
+//     console.log("Error:" + err);
+// });
+fetch("https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec")
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.error("Error:", error));
+
 
   // const result = await response;  // Nhận phản hồi từ Google Apps Script
   // console.log(result);  // Hiển thị kết quả
