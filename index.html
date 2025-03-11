@@ -675,7 +675,8 @@
     headers: {
       'Content-Type': 'application/json'  // Đảm bảo nội dung là JSON
     },
-    body: JSON.stringify(data)  // Chuyển đổi dữ liệu thành chuỗi JSON
+    body: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+    mode: 'cors',
   });
 
   const result = await response;  // Nhận phản hồi từ Google Apps Script
