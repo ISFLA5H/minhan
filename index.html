@@ -537,7 +537,7 @@
                 <div class="col-12 wow fadeInUp">
                   <textarea class="form-control" id="message" name="Message" rows="6" placeholder="Enter message here.."></textarea>
                 </div>
-                <button onclick="AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
+                <button onclick="return AddMessage()" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
               </div>
             </form>
           </div>
@@ -632,15 +632,16 @@
 
   <script>
 
-    function AddMessage(event)
+    function AddMessage()
     {
       event.preventDefault();
-      var oneMessage = {};
-      oneMessage.name = document.getElementById("name").value;
-      oneMessage.email = document.getElementById("email").value;
-      oneMessage.subject = document.getElementById("subject").value;
-      oneMessage.message = document.getElementById("message").value;
-      google.script.run.withSuccessHandler(AddMessage).withFailureHandler(ErrorCheck).SaveContactCV(oneMessage);
+      return false;
+      var dataRequest = {};
+      dataRequest.name = document.getElementById("name").value;
+      dataRequest.email = document.getElementById("email").value;
+      dataRequest.subject = document.getElementById("subject").value;
+      dataRequest.message = document.getElementById("message").value;
+      google.script.run.withSuccessHandler(AddMessage).withFailureHandler(ErrorCheck).SaveContactCV(dataRequest);
     }
 
     function AddMessage(response){
