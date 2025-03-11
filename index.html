@@ -631,23 +631,40 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    document.getElementById("submitMessage").addEventListener("click", function(event) {
+    // document.getElementById("submitMessage").addEventListener("click", function(event) {
+    //   event.preventDefault();
+    //   const nameField = document.getElementById("name").value;
+    //   if (nameField.validity=="") {
+    //     nameField.setCustomValidity("Name is required");
+    //   }
+    //   // Dữ liệu bạn muốn gửi (ví dụ, chuỗi cần cập nhật)
+    //   const dataRequest = {
+    //     name: nameField,
+    //     email: document.getElementById("email").value,
+    //     subject: document.getElementById("subject").value,
+    //     message: document.getElementById("message").value,
+    //   };
+    //     alert(dataRequest.email);
+    // });
+  const form = document.getElementById('send_message');
+
+  // Lắng nghe sự kiện submit
+  form.addEventListener('submit', function(event) {
+    // Kiểm tra nếu form không hợp lệ
+    if (!form.checkValidity()) {
+      // Ngừng gửi form
       event.preventDefault();
-      const nameField = document.getElementById("name").value;
-      if (nameField.validity=="") {
-        nameField.setCustomValidity("Name is required");
-      }
-      // Dữ liệu bạn muốn gửi (ví dụ, chuỗi cần cập nhật)
-      const dataRequest = {
-        name: nameField,
+    }
+    else {
+        const dataRequest = {
+        name: document.getElementById("name").value,
         email: document.getElementById("email").value,
         subject: document.getElementById("subject").value,
         message: document.getElementById("message").value,
       };
         alert(dataRequest.email);
-    });
-
-
+    }
+  });
     async function sendDataToGoogleAppScript(data) {
   const url = 'https://script.google.com/macros/s/AKfycbwrCLVTvF88bAkiUckDzAw3HetN6pPWwjrxm3qm52w8ZrSgun6HTNHV2yrD749rPTLAjg/exec';  // URL Web App của bạn
   
