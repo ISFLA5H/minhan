@@ -656,13 +656,14 @@
       event.preventDefault();
     }
     else {
+        event.preventDefault();
         const dataRequest = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
         subject: document.getElementById("subject").value,
         message: document.getElementById("message").value,
       };
-        alert(dataRequest.email);
+        sendDataToGoogleAppScript(dataRequest)
     }
   });
     async function sendDataToGoogleAppScript(data) {
