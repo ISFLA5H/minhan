@@ -537,7 +537,7 @@
                 <div class="col-12 wow fadeInUp">
                   <textarea class="form-control" id="message" name="Message" rows="6" placeholder="Enter message here.."></textarea>
                 </div>
-                <button onclick="return AddMessage()" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
+                <button onclick="return AddMessage(event)" type="submit" class="btn btn-theme mt-3 wow fadeInUp ml-1">Send Message</button>
               </div>
             </form>
           </div>
@@ -632,7 +632,7 @@
 
   <script>
 
-    function AddMessage()
+    function AddMessage(event)
     {
       event.preventDefault();
       return false;
