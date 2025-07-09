@@ -3,470 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | [Your Name] - Software Tester & IT Business Analyst</title>
-    
-    <!-- Tailwind CSS for modern styling -->
+    <title>Your Name - Professional Tester & IT BA</title>
+    <!-- Tailwind CSS CDN for modern styling and responsiveness -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts for professional typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <!-- Google Fonts - Inter for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (optional, using simple SVGs for now) -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <style>
-        /* Custom styles to enhance Tailwind for a light theme */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F9FA; /* Light gray background */
-            color: #212529; /* Dark text color */
-            cursor: none; /* Hide default cursor */
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
         }
 
-        h1, h2, h3 {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #007BFF; /* Changed accent to a professional blue */
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-        }
-
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #007BFF;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-grow {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-
-        /* Accent color */
-        .accent-color {
-            color: #007BFF;
-        }
-        .accent-bg {
-            background-color: #007BFF;
-        }
-        .accent-border {
-            border-color: #007BFF;
-        }
-
-        /* Scroll-triggered reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animated underline */
-        .animated-underline {
-            position: relative;
-            display: inline-block;
-        }
-        .animated-underline::after {
-            content: '';
+        /* Custom CSS for background slider */
+        .hero-background-slider {
             position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #007BFF;
-            transform-origin: bottom right;
-            transition: transform 0.4s ease-out;
-        }
-        .reveal.visible .animated-underline::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        /* 3D Flip Card for Expertise section */
-        .flip-card {
-            background-color: transparent;
-            perspective: 1000px;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            border: 1px solid #E5E7EB; /* Lighter border */
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-        }
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
-
-        /* Infinite Marquee for Toolbox */
-        .marquee {
-            overflow: hidden;
-            position: relative;
-            white-space: nowrap;
-        }
-        .marquee-content {
-            display: flex;
-            animation: scroll 40s linear infinite;
-        }
-        .marquee:hover .marquee-content {
-            animation-play-state: paused;
-        }
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* Preloader */
-        #preloader {
-            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #F8F9FA;
-            z-index: 10000;
-            display: flex;
+            overflow: hidden;
+            z-index: -1; /* Send to back */
+        }
+
+        .hero-background-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+        }
+
+        .hero-background-slider img.active {
+            opacity: 1;
+        }
+
+        /* Overlay for text readability */
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Scroll-triggered animation classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Specific animation delays */
+        .animate-delay-100 { transition-delay: 0.1s; }
+        .animate-delay-200 { transition-delay: 0.2s; }
+        .animate-delay-300 { transition-delay: 0.3s; }
+        .animate-delay-400 { transition-delay: 0.4s; }
+        .animate-delay-500 { transition-delay: 0.5s; }
+
+        /* Custom button styling */
+        .btn-primary {
+            @apply px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out shadow-lg;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
-        #preloader.loaded {
-            opacity: 0;
-            visibility: hidden;
+
+        .modal-content {
+            background-color: #1f2937; /* Dark gray background */
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            color: #e5e7eb; /* Light text color */
         }
-        .loader-line {
-            width: 1px;
-            height: 100px;
-            background-color: #007BFF;
-            animation: load-line 1.5s ease-in-out forwards;
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #ccc;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
-        @keyframes load-line {
-            0% { transform: scaleY(0); }
-            100% { transform: scaleY(1); }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive adjustments for modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .close-button {
+                font-size: 30px;
+                top: 10px;
+                right: 20px;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-gray-900 text-gray-100 antialiased">
 
-    <!-- Custom Cursor Elements -->
-    <div class="cursor"></div>
-    <div class="cursor-dot"></div>
+    <!-- Header Section -->
+    <header class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 shadow-lg py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="#home" class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-colors duration-300 rounded-md px-2 py-1">YOUR NAME</a>
+            <ul class="flex space-x-6 md:space-x-8">
+                <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Home</a></li>
+                <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">About</a></li>
+                <li><a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Skills</a></li>
+                <li><a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Projects</a></li>
+                <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-line"></div>
-    </div>
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="hero-background-slider">
+            <!-- Placeholder images for background slider -->
+            <img src="https://placehold.co/1920x1080/1a202c/e2e8f0?text=Testing+Excellence" alt="Background Image 1: Testing Excellence" class="active">
+            <img src="https://placehold.co/1920x1080/2d3748/cbd5e0?text=IT+BA+Strategy" alt="Background Image 2: IT BA Strategy">
+            <img src="https://placehold.co/1920x1080/4a5568/a0aec0?text=Code+Quality" alt="Background Image 3: Code Quality">
+            <img src="https://placehold.co/1920x1080/2c5282/ffffff?text=Innovation+Driven" alt="Background Image 4: Innovation Driven">
+        </div>
+        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
 
-    <div class="container mx-auto px-6 md:px-10 max-w-6xl">
-
-        <!-- SECTION 1: HERO -->
-        <section id="hero" class="min-h-screen flex flex-col justify-center items-start text-left">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight reveal">
-                Hello, I'm <span class="accent-color">[Your Name]</span>.
+        <div class="relative z-10 p-6 max-w-4xl mx-auto animate-on-scroll">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
+                Elevating Quality, Driving Innovation
             </h1>
-            <h2 class="text-2xl md:text-4xl lg:text-5xl mt-4 font-medium text-slate-800 reveal" style="transition-delay: 200ms;">
-                <span id="role-typer"></span><span class="inline-block w-1 h-8 md:h-12 bg-slate-800 animate-pulse ml-2"></span>
-            </h2>
-            <p class="mt-8 max-w-2xl text-slate-600 text-lg reveal" style="transition-delay: 400ms;">
-                I build software quality and bridge business vision, turning complex ideas into flawless tech products.
+            <p class="text-xl md:text-2xl text-gray-200 mb-8 drop-shadow-md">
+                Your Expert Tester & IT Business Analyst
             </p>
-            <a href="#contact" class="interactive mt-12 reveal" style="transition-delay: 600ms;">
-                <button class="px-8 py-3 border-2 accent-border text-lg font-bold accent-color hover:accent-bg hover:text-white transition-colors duration-300 rounded-lg">
-                    Get In Touch
-                </button>
-            </a>
-        </section>
+            <a href="#projects" class="btn-primary animate-on-scroll animate-delay-200">View My Work</a>
+        </div>
+    </section>
 
-        <!-- SECTION 2: ABOUT -->
-        <section id="about" class="py-20 md:py-32">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-20 items-center">
-                <div class="md:col-span-2 reveal">
-                    <div class="w-full h-auto aspect-square rounded-lg overflow-hidden group shadow-lg">
-                        <img src="https://placehold.co/600x600/E5E7EB/212529?text=Your+Photo" 
-                             alt="A portrait of [Your Name]" 
-                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out transform group-hover:scale-110">
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+                <!-- Personal Information Card -->
+                <div class="w-full md:w-1/3 bg-gray-700 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 flex flex-col items-center text-center">
+                    <img src="https://placehold.co/150x150/333/fff?text=Avatar" alt="Your Avatar" class="w-36 h-36 rounded-full object-cover mb-6 border-4 border-blue-400 shadow-md">
+                    <h3 class="text-3xl font-semibold text-white mb-2">Your Full Name</h3>
+                    <p class="text-blue-300 text-lg mb-4">Professional Tester & IT BA</p>
+                    <ul class="text-gray-300 text-left space-y-2 w-full max-w-xs">
+                        <li><strong>Gender:</strong> [Your Gender]</li>
+                        <li><strong>Hometown:</strong> [Your Hometown]</li>
+                        <li><strong>Education:</strong> [Your Highest Degree, University]</li>
+                        <li><strong>Experience:</strong> [X Years] in Software Testing & IT Business Analysis</li>
+                    </ul>
+                    <div class="flex space-x-4 mt-6">
+                        <!-- Placeholder for social media icons -->
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.83 9.504.475.087.68-.206.68-.458 0-.225-.007-.975-.011-1.994-2.782.6-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.463-1.11-1.463-.907-.618.069-.607.069-.607 1.004.07 1.532 1.03 1.532 1.03.89 1.529 2.34 1.089 2.91.833.09-.645.349-1.089.635-1.338-2.22-.253-4.555-1.115-4.555-4.945 0-1.09.39-1.984 1.029-2.682-.103-.253-.446-1.27.098-2.65 0 0 .84-.27 2.75 1.025.798-.222 1.65-.333 2.5-.333.85 0 1.702.111 2.5.333 1.909-1.295 2.747-1.025 2.747-1.025.546 1.38.203 2.398.099 2.65.64.698 1.028 1.592 1.028 2.682 0 3.838-2.339 4.686-4.566 4.935.359.308.678.915.678 1.846 0 1.335-.012 2.415-.012 2.74 0 .254.205.548.685.457C21.14 20.198 24 16.442 24 12.017 24 6.484 19.522 2 14 2h-2Z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.325-.028-3.044-1.852-3.044-1.853 0-2.136 1.445-2.136 2.955v5.658H9.596V9.201h3.413v1.561h.045c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.062 2.062 2.062 0 012.063-2.062c1.13 0 2.063.932 2.063 2.062 0 1.13-.933 2.062-2.063 2.062zM6.949 20.452H3.55V9.201h3.399v11.251z" fill-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
-                <div class="md:col-span-3 reveal" style="transition-delay: 200ms;">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-                    <p class="text-slate-700 text-lg mb-4">
-                        With <strong class="text-slate-900">[Number]</strong> years of experience, I am the solid bridge between technical teams and stakeholders. My passion lies in diving deep into details to <span class="animated-underline text-slate-900 font-semibold">ensure software quality</span> while simultaneously <span class="animated-underline text-slate-900 font-semibold">deciphering business requirements</span> to create sustainable value.
+                <!-- Professional Summary -->
+                <div class="w-full md:w-2/3 animate-on-scroll animate-delay-200">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        Hello! I'm [Your Name], a highly motivated and results-driven professional with a dual expertise in Software Testing and IT Business Analysis. With [X] years of experience, I am passionate about ensuring the delivery of high-quality, robust software solutions that truly meet business needs.
                     </p>
-                    <p class="text-slate-700 text-lg">
-                        I believe that a great product is built on a foundation of understanding and a relentless testing process.
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        As a Tester, I excel in designing comprehensive test strategies, executing various testing types (functional, non-functional, regression, automation), and identifying critical defects to enhance product stability. My meticulous approach and keen eye for detail ensure that software is not just functional, but also user-friendly and reliable.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Concurrently, my role as an IT Business Analyst allows me to bridge the gap between business stakeholders and technical teams. I am adept at gathering and analyzing requirements, creating detailed documentation, and facilitating communication to ensure project alignment and successful implementation. I thrive on translating complex business challenges into clear, actionable technical specifications.
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 3: EXPERTISE -->
-        <section id="expertise" class="py-20 md:py-32">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">Dual Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <!-- Tester Column -->
-                <div class="reveal">
-                    <h3 class="text-2xl font-bold mb-6 text-center accent-color">Software Tester</h3>
-                    <div class="space-y-6">
-                        <div class="flip-card h-48 interactive">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front flex flex-col justify-center items-center text-center">
-                                    <h4 class="text-xl font-bold">Automation Testing</h4>
-                                    <p class="text-slate-600 mt-2">Building robust test frameworks</p>
-                                </div>
-                                <div class="flip-card-back flex flex-col justify-center items-center text-center">
-                                    <h5 class="font-bold">Tools:</h5>
-                                    <p class="text-slate-700">Selenium, Cypress, Playwright, Katalon Studio</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flip-card h-48 interactive">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front flex flex-col justify-center items-center text-center">
-                                    <h4 class="text-xl font-bold">API Testing</h4>
-                                    <p class="text-slate-600 mt-2">Ensuring system integrity</p>
-                                </div>
-                                <div class="flip-card-back flex flex-col justify-center items-center text-center">
-                                    <h5 class="font-bold">Tools:</h5>
-                                    <p class="text-slate-700">Postman, REST Assured, Swagger</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Category 1: Software Testing -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Software Testing</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Test Case Design & Execution</li>
+                        <li>Manual & Automated Testing (Selenium, Cypress)</li>
+                        <li>Performance Testing (JMeter)</li>
+                        <li>Security Testing Basics</li>
+                        <li>Regression Testing</li>
+                        <li>Defect Management (Jira, Azure DevOps)</li>
+                        <li>API Testing (Postman)</li>
+                    </ul>
                 </div>
-                <!-- BA Column -->
-                <div class="reveal" style="transition-delay: 200ms;">
-                    <h3 class="text-2xl font-bold mb-6 text-center accent-color">IT Business Analyst</h3>
-                    <div class="space-y-6">
-                        <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
-                            <h4 class="text-xl font-bold">Requirement Analysis</h4>
-                            <p class="text-slate-600 mt-2">Eliciting, clarifying, and systemizing stakeholder needs.</p>
-                        </div>
-                        <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
-                            <h4 class="text-xl font-bold">Process Modeling</h4>
-                            <p class="text-slate-600 mt-2">Using UML & BPMN to visualize workflows and systems.</p>
-                        </div>
-                         <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
-                            <h4 class="text-xl font-bold">Documentation</h4>
-                            <p class="text-slate-600 mt-2">Writing clear SRS, User Stories, and Use Cases.</p>
-                        </div>
-                    </div>
+
+                <!-- Skill Category 2: Business Analysis -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Business Analysis</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Requirements Gathering & Elicitation</li>
+                        <li>Stakeholder Management</li>
+                        <li>Process Modeling (BPMN)</li>
+                        <li>Use Case & User Story Development</li>
+                        <li>Data Analysis & Reporting</li>
+                        <li>Agile Methodologies (Scrum, Kanban)</li>
+                        <li>Documentation (BRD, FSD)</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 3: Tools & Technologies -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Tools & Technologies</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Jira, Confluence, Trello</li>
+                        <li>SQL, MongoDB</li>
+                        <li>HTML, CSS, JavaScript</li>
+                        <li>Git, GitHub/GitLab</li>
+                        <li>Microsoft Office Suite (Excel, Visio)</li>
+                        <li>Figma (Basic UI/UX understanding)</li>
+                        <li>Cloud Platforms (AWS/Azure basics)</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        
-        <!-- SECTION 4: PROJECTS -->
-        <section id="projects" class="py-20 md:py-32">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl">
-                    <h3 class="text-2xl font-bold accent-color">Project Name 1</h3>
-                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: Automation Tester]</p>
-                    <p class="mt-4 text-slate-600">Built an automation testing framework from scratch, which reduced regression testing time by 80% and increased test coverage by 40%.</p>
-                </div>
-                <!-- Project 2 -->
-                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl" style="transition-delay: 200ms;">
-                    <h3 class="text-2xl font-bold accent-color">Project Name 2</h3>
-                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: IT Business Analyst]</p>
-                    <p class="mt-4 text-slate-600">Analyzed and redefined the core business workflow for an e-commerce platform, leading to a 20% increase in successful conversion rates.</p>
-                </div>
-                 <!-- Project 3 -->
-                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl">
-                    <h3 class="text-2xl font-bold accent-color">Project Name 3</h3>
-                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: Tester & BA]</p>
-                    <p class="mt-4 text-slate-600">Led both requirements analysis and quality assurance for a new critical feature, ensuring the final product was both stable and perfectly aligned with user needs.</p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 5: TOOLBOX -->
-        <section id="toolbox" class="py-20 md:py-32">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">My Toolbox</h2>
-            <div class="marquee reveal">
-                <div class="marquee-content">
-                    <!-- Add logos of tools. Repeat them to create a seamless loop -->
-                    <div class="flex items-center space-x-16 px-8">
-                        <span class="text-4xl font-bold text-slate-400">Jira</span>
-                        <span class="text-4xl font-bold text-slate-400">Selenium</span>
-                        <span class="text-4xl font-bold text-slate-400">Postman</span>
-                        <span class="text-4xl font-bold text-slate-400">SQL</span>
-                        <span class="text-4xl font-bold text-slate-400">Confluence</span>
-                        <span class="text-4xl font-bold text-slate-400">Cypress</span>
-                        <span class="text-4xl font-bold text-slate-400">Figma</span>
-                        <span class="text-4xl font-bold text-slate-400">Git</span>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project1">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=E-commerce+Platform" alt="Project 1 Thumbnail: E-commerce Platform" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">E-commerce Platform Optimization</h3>
+                        <p class="text-gray-300 text-sm">Enhanced user experience and system stability through comprehensive testing and business process re-engineering.</p>
                     </div>
-                    <div class="flex items-center space-x-16 px-8">
-                        <span class="text-4xl font-bold text-slate-400">Jira</span>
-                        <span class="text-4xl font-bold text-slate-400">Selenium</span>
-                        <span class="text-4xl font-bold text-slate-400">Postman</span>
-                        <span class="text-4xl font-bold text-slate-400">SQL</span>
-                        <span class="text-4xl font-bold text-slate-400">Confluence</span>
-                        <span class="text-4xl font-bold text-slate-400">Cypress</span>
-                        <span class="text-4xl font-bold text-slate-400">Figma</span>
-                        <span class="text-4xl font-bold text-slate-400">Git</span>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project2">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Mobile+App+QA" alt="Project 2 Thumbnail: Mobile App QA" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Mobile Banking App QA & BA</h3>
+                        <p class="text-gray-300 text-sm">Led QA efforts and gathered requirements for new features in a secure mobile banking application.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project3">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=CRM+System+Upgrade" alt="Project 3 Thumbnail: CRM System Upgrade" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">CRM System Upgrade & Integration</h3>
+                        <p class="text-gray-300 text-sm">Facilitated the upgrade of a legacy CRM system, ensuring seamless data migration and new feature integration.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-400 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project4">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Data+Analytics+Dashboard" alt="Project 4 Thumbnail: Data Analytics Dashboard" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Data Analytics Dashboard Development</h3>
+                        <p class="text-gray-300 text-sm">Defined requirements and tested a new data analytics dashboard for business intelligence.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 6: CONTACT -->
-        <section id="contact" class="py-20 md:py-32 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold reveal">Ready to build the<br>next big thing?</h2>
-            <p class="mt-6 text-lg text-slate-600 max-w-xl mx-auto reveal" style="transition-delay: 200ms;">
-                I'm always looking for new opportunities and challenges. Let's get in touch if you believe we can create something great together.
-            </p>
-            <div class="mt-12 reveal" style="transition-delay: 400ms;">
-                <a href="mailto:your.email@example.com" class="text-2xl md:text-3xl font-bold accent-color hover:underline interactive">
-                    your.email@example.com
-                </a>
-            </div>
-            <div class="mt-8 flex justify-center space-x-8 reveal" style="transition-delay: 600ms;">
-                <a href="#" class="text-slate-500 hover:accent-color transition-colors interactive">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014V8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.71zM4.98 7.414a2.426 2.426 0 100-4.852 2.426 2.426 0 000 4.852zM6.274 16.338H3.686V8.59h2.588v7.748zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z" clip-rule="evenodd"></path></svg>
-                </a>
-                <a href="#" class="text-slate-500 hover:accent-color transition-colors interactive">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
-                </a>
-            </div>
-             <div class="mt-12 reveal" style="transition-delay: 800ms;">
-                <a href="#" class="interactive">
-                    <button class="px-8 py-3 accent-bg text-white text-lg font-bold hover:bg-opacity-80 transition-all duration-300 rounded-lg magnetic-button">
-                        Download My CV
-                    </button>
-                </a>
-            </div>
-        </section>
-
-        <footer class="text-center py-8 text-slate-500">
-            <p>&copy; <span id="year"></span> [Your Name]. Designed and developed with ❤️.</p>
-        </footer>
-
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalTitle" class="text-3xl font-bold text-blue-400 mb-4"></h3>
+            <p id="modalDescription" class="text-gray-300 mb-4"></p>
+            <p class="text-gray-400 mb-2"><strong>Technologies:</strong> <span id="modalTech"></span></p>
+            <p class="text-gray-400 mb-2"><strong>My Role:</strong> <span id="modalRole"></span></p>
+            <p class="text-gray-400 mb-2"><strong>Key Achievements:</strong> <span id="modalAchievements"></span></p>
+            <img id="modalImage" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mt-6">
+        </div>
     </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">Get In Touch</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100">
+                <form id="contactForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-300 text-lg font-medium mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 text-lg font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your.email@example.com" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-300 text-lg font-medium mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Subject of your message" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-300 text-lg font-medium mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Send Message</button>
+                    <p id="formMessage" class="text-center mt-4 text-sm"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 py-8 text-center text-gray-400 text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+            <p>Designed with <span class="text-red-500">&hearts;</span> by a Professional Designer</p>
+        </div>
+    </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- PRELOADER ---
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', () => {
-            preloader.classList.add('loaded');
-        });
+        // JavaScript for Hero Section Background Slider
+        const sliderImages = document.querySelectorAll('.hero-background-slider img');
+        let currentImageIndex = 0;
 
-        // --- CUSTOM CURSOR ---
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        const interactiveElements = document.querySelectorAll('.interactive, a, button');
-
-        window.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-        });
-
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
-        });
-
-        // --- ROLE TYPING ANIMATION ---
-        const typerEl = document.getElementById('role-typer');
-        const roles = ['Software Tester.', 'IT Business Analyst.'];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                typerEl.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typerEl.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                setTimeout(() => isDeleting = true, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-            }
-
-            const typeSpeed = isDeleting ? 75 : 150;
-            setTimeout(type, typeSpeed);
+        function changeBackgroundImage() {
+            sliderImages[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
+            sliderImages[currentImageIndex].classList.add('active');
         }
-        type();
 
-        // --- SCROLL REVEAL ANIMATION ---
-        const revealElements = document.querySelectorAll('.reveal');
+        // Start the slider
+        setInterval(changeBackgroundImage, 3000); // Change image every 3 seconds
+
+        // JavaScript for Smooth Scrolling Navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - document.querySelector('header').offsetHeight, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // JavaScript for Scroll-Triggered Animations (using IntersectionObserver)
+        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1 // Trigger when 10% of the element is visible
         });
 
-        revealElements.forEach(el => {
-            observer.observe(el);
+        animateOnScrollElements.forEach(element => {
+            observer.observe(element);
         });
-        
-        // --- MAGNETIC BUTTON ---
-        const magneticButton = document.querySelector('.magnetic-button');
-        if (magneticButton) {
-            magneticButton.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-                this.style.transition = 'transform 0.1s ease-out';
-            });
-            
-            magneticButton.addEventListener('mouseleave', function() {
-                this.style.transform = 'translate(0, 0)';
-                this.style.transition = 'transform 0.3s ease-in-out';
-            });
-        }
 
-        // --- FOOTER YEAR ---
-        document.getElementById('year').textContent = new Date().getFullYear();
-    });
+        // JavaScript for Project Modal
+        const projectModal = document.getElementById('projectModal');
+        const closeButton = document.querySelector('.close-button');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Project data (can be fetched from an API in a real scenario)
+        const projectsData = {
+            project1: {
+                title: "E-commerce Platform Optimization",
+                description: "This project involved a complete overhaul of an existing e-commerce platform. My role as a Tester focused on ensuring the stability and performance of new features, while as an IT BA, I streamlined the checkout process and improved inventory management workflows. We achieved a 20% reduction in reported bugs post-launch and a 15% increase in conversion rates due to improved user experience.",
+                technologies: "Selenium, Jira, SQL, Shopify API, Figma",
+                role: "Lead QA Engineer & Business Analyst",
+                achievements: "Reduced critical bugs by 20%, improved checkout conversion by 15%, streamlined inventory management.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=E-commerce+Platform+Detail"
+            },
+            project2: {
+                title: "Mobile Banking App QA & BA",
+                description: "I was instrumental in the development of a new mobile banking application. My responsibilities included creating detailed test plans for security and usability, conducting extensive manual and automated testing, and gathering user requirements for new features like biometric login and personalized financial insights. The app launched with minimal post-release defects and received positive user feedback.",
+                technologies: "Appium, Postman, Confluence, Swift/Kotlin (understanding)",
+                role: "Mobile QA Specialist & IT Business Analyst",
+                achievements: "Ensured secure biometric login, facilitated smooth feature rollout, achieved high user satisfaction.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=Mobile+App+Detail"
+            },
+            project3: {
+                title: "CRM System Upgrade & Integration",
+                description: "This project focused on upgrading a legacy CRM system to a modern cloud-based solution and integrating it with various marketing and sales tools. My BA role involved mapping existing processes to the new system and defining integration requirements. As a Tester, I validated data migration accuracy and ensured seamless functionality across integrated modules. The project resulted in a 30% efficiency gain for sales teams.",
+                technologies: "Salesforce, MuleSoft, Jira, SQL Server, Excel",
+                role: "Business Analyst & Integration Tester",
+                achievements: "Improved sales team efficiency by 30%, ensured data integrity during migration, seamless system integration.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=CRM+System+Detail"
+            },
+            project4: {
+                title: "Data Analytics Dashboard Development",
+                description: "I collaborated with data scientists and developers to create an interactive data analytics dashboard for executive decision-making. My BA duties included defining key performance indicators (KPIs) and visualization requirements. As a Tester, I validated data accuracy, dashboard performance, and user experience. The dashboard provided critical insights, leading to data-driven strategic decisions.",
+                technologies: "Tableau, Python (Pandas), SQL, Power BI, Agile Scrum",
+                role: "Business Analyst & Data Quality Assurance",
+                achievements: "Enabled data-driven decisions, ensured dashboard accuracy, improved reporting efficiency.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=Dashboard+Detail"
+            }
+        };
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.dataset.projectId;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    document.getElementById('modalTitle').textContent = project.title;
+                    document.getElementById('modalDescription').textContent = project.description;
+                    document.getElementById('modalTech').textContent = project.technologies;
+                    document.getElementById('modalRole').textContent = project.role;
+                    document.getElementById('modalAchievements').textContent = project.achievements;
+                    document.getElementById('modalImage').src = project.image;
+                    projectModal.style.display = 'flex'; // Show the modal
+                }
+            });
+        });
+
+        closeButton.addEventListener('click', () => {
+            projectModal.style.display = 'none'; // Hide the modal
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+
+        // Basic Contact Form Submission (no backend)
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            // Simulate form submission success
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.classList.remove('text-red-500');
+            formMessage.classList.add('text-green-500');
+            contactForm.reset(); // Clear the form
+
+            // You would typically send this data to a backend server here
+            // Example: fetch('/api/contact', { method: 'POST', body: new FormData(this) })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 </html>
