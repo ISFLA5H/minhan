@@ -3,142 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Professional Tester & IT BA Portfolio</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Your Name - Professional Tester & IT BA</title>
+    <!-- Tailwind CSS CDN for modern styling and responsiveness -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (optional, using simple SVGs for now) -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
         }
-        /* Custom animations for section visibility */
-        .fade-in-up {
+
+        /* Custom CSS for background slider */
+        .hero-background-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Send to back */
+        }
+
+        .hero-background-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+        }
+
+        .hero-background-slider img.active {
+            opacity: 1;
+        }
+
+        /* Overlay for text readability */
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Scroll-triggered animation classes */
+        .animate-on-scroll {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .fade-in-up.is-visible {
+
+        .animate-on-scroll.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
-        .delay-500 { transition-delay: 500ms; }
-        .delay-600 { transition-delay: 600ms; }
 
-        /* Custom styles for hero section text animation */
-        #hero-headline, #hero-tagline-1, #hero-tagline-2, #hero-cta {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        #hero-headline.show { opacity: 1; transform: translateY(0); }
-        #hero-tagline-1.show { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
-        #hero-tagline-2.show { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
-        #hero-cta.show { opacity: 1; transform: translateY(0); transition-delay: 600ms; }
+        /* Specific animation delays */
+        .animate-delay-100 { transition-delay: 0.1s; }
+        .animate-delay-200 { transition-delay: 0.2s; }
+        .animate-delay-300 { transition-delay: 0.3s; }
+        .animate-delay-400 { transition-delay: 0.4s; }
+        .animate-delay-500 { transition-delay: 0.5s; }
 
-        /* Image loading spinner */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #3B82F6; /* Blue color */
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        /* Custom button styling */
+        .btn-primary {
+            @apply px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out shadow-lg;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        /* Modal styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1f2937; /* Dark gray background */
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            color: #e5e7eb; /* Light text color */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #ccc;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive adjustments for modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .close-button {
+                font-size: 30px;
+                top: 10px;
+                right: 20px;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-900 text-white">
+<body class="bg-gray-900 text-gray-100 antialiased">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed w-full bg-gray-900 bg-opacity-90 z-50 shadow-lg p-4 flex justify-center space-x-6 md:space-x-12 rounded-b-xl">
-        <button class="nav-item text-lg font-medium py-2 px-4 rounded-full transition-all duration-300 text-gray-300 hover:text-blue-400 hover:bg-gray-800" data-section="home">Home</button>
-        <button class="nav-item text-lg font-medium py-2 px-4 rounded-full transition-all duration-300 text-gray-300 hover:text-blue-400 hover:bg-gray-800" data-section="about">About Me</button>
-        <button class="nav-item text-lg font-medium py-2 px-4 rounded-full transition-all duration-300 text-gray-300 hover:text-blue-400 hover:bg-gray-800" data-section="skills">Skills</button>
-        <button class="nav-item text-lg font-medium py-2 px-4 rounded-full transition-all duration-300 text-gray-300 hover:text-blue-400 hover:bg-gray-800" data-section="projects">Projects</button>
-        <button class="nav-item text-lg font-medium py-2 px-4 rounded-full transition-all duration-300 text-gray-300 hover:text-blue-400 hover:bg-gray-800" data-section="contact">Contact</button>
-    </nav>
+    <!-- Header Section -->
+    <header class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 shadow-lg py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="#home" class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-colors duration-300 rounded-md px-2 py-1">YOUR NAME</a>
+            <ul class="flex space-x-6 md:space-x-8">
+                <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Home</a></li>
+                <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">About</a></li>
+                <li><a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Skills</a></li>
+                <li><a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Projects</a></li>
+                <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen w-full flex items-center justify-center text-center overflow-hidden" style="background-image: url('https://placehold.co/1920x1080/0A192F/E0E0E0?text=Tech+Background'); background-size: cover; background-position: center;">
-        <!-- Overlay for better text readability -->
-        <div class="absolute inset-0 bg-black opacity-60"></div>
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="hero-background-slider">
+            <!-- Placeholder images for background slider -->
+            <img src="https://placehold.co/1920x1080/1a202c/e2e8f0?text=Testing+Excellence" alt="Background Image 1: Testing Excellence" class="active">
+            <img src="https://placehold.co/1920x1080/2d3748/cbd5e0?text=IT+BA+Strategy" alt="Background Image 2: IT BA Strategy">
+            <img src="https://placehold.co/1920x1080/4a5568/a0aec0?text=Code+Quality" alt="Background Image 3: Code Quality">
+            <img src="https://placehold.co/1920x1080/2c5282/ffffff?text=Innovation+Driven" alt="Background Image 4: Innovation Driven">
+        </div>
+        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
 
-        <div class="relative z-10 p-6 max-w-4xl mx-auto">
-            <h1 id="hero-headline" class="text-5xl md:text-7xl font-extrabold leading-tight mb-4">
-                <span class="text-blue-400">Your Name</span>
+        <div class="relative z-10 p-6 max-w-4xl mx-auto animate-on-scroll">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
+                Elevating Quality, Driving Innovation
             </h1>
-            <p id="hero-tagline-1" class="text-2xl md:text-4xl font-light text-gray-200 mb-8">
-                Professional Tester & Exceptional IT Business Analyst
+            <p class="text-xl md:text-2xl text-gray-200 mb-8 drop-shadow-md">
+                Your Expert Tester & IT Business Analyst
             </p>
-            <p id="hero-tagline-2" class="text-lg md:text-xl text-gray-300 mb-10">
-                Bridging Technology and Business for Flawless Solutions.
-            </p>
-            <button id="hero-cta" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg transition-all duration-500 ease-in-out transform hover:scale-105 active:scale-95" data-section="projects">
-                Explore My Work
-            </button>
+            <a href="#projects" class="btn-primary animate-on-scroll animate-delay-200">View My Work</a>
         </div>
     </section>
 
     <!-- About Me Section -->
-    <section id="about" class="py-20 px-6 bg-gray-800 text-white">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl font-bold text-center mb-12 text-blue-400">About Me</h2>
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">About Me</h2>
             <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
-                <!-- Avatar and Info Box -->
-                <div class="flex flex-col items-center md:w-1/3 fade-in-up">
-                    <img
-                        src="https://placehold.co/200x200/4A5568/FFFFFF?text=Your+Avatar"
-                        alt="Your Avatar"
-                        class="rounded-full w-48 h-48 object-cover border-4 border-blue-500 shadow-xl mb-8"
-                    />
-                    <div class="bg-gray-700 p-8 rounded-xl shadow-lg w-full max-w-sm">
-                        <h3 class="text-2xl font-semibold mb-4 text-center">Personal Information</h3>
-                        <ul class="space-y-3 text-lg">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-300"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                <span class="font-bold">Name:</span> Your Name
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-300"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 11v10"/></svg>
-                                <span class="font-bold">Profession:</span> Professional Tester & IT Business Analyst
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-300"><path d="M21.43 12.21v2.1l-1.43 1.43V21h-3.43l-1.43-1.43H7.43L6 21H2.57L1.14 19.57V17.14L0 15.71V12.21L1.43 10.78V7.14L2.57 6H6L7.43 4.57h3.43L12.21 3.14V0L15.71 1.14V3.14L17.14 4.57H21.43L22.57 6V7.14L24 10.78V12.21z"/><path d="M12 12V6.5"/><path d="M12 12H6.5"/><path d="M12 12V17.5"/><path d="M12 12H17.5"/></svg>
-                                <span class="font-bold">Education:</span> Bachelor of Science in Computer Science, University of Technology
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-300"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M18 18h4"/><path d="M18 22h4"/><path d="M22 18v4"/></svg>
-                                <span class="font-bold">Experience:</span> 8+ Years
-                            </li>
-                            <li class="flex items-center">
-                                <span class="mr-3 text-blue-300">♀/♂</span> <span class="font-bold">Gender:</span> Female
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-blue-300"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                                <span class="font-bold">Hometown:</span> Ho Chi Minh City, Vietnam
-                            </li>
-                        </ul>
+                <!-- Personal Information Card -->
+                <div class="w-full md:w-1/3 bg-gray-700 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 flex flex-col items-center text-center">
+                    <img src="https://placehold.co/150x150/333/fff?text=Avatar" alt="Your Avatar" class="w-36 h-36 rounded-full object-cover mb-6 border-4 border-blue-400 shadow-md">
+                    <h3 class="text-3xl font-semibold text-white mb-2">Your Full Name</h3>
+                    <p class="text-blue-300 text-lg mb-4">Professional Tester & IT BA</p>
+                    <ul class="text-gray-300 text-left space-y-2 w-full max-w-xs">
+                        <li><strong>Gender:</strong> [Your Gender]</li>
+                        <li><strong>Hometown:</strong> [Your Hometown]</li>
+                        <li><strong>Education:</strong> [Your Highest Degree, University]</li>
+                        <li><strong>Experience:</strong> [X Years] in Software Testing & IT Business Analysis</li>
+                    </ul>
+                    <div class="flex space-x-4 mt-6">
+                        <!-- Placeholder for social media icons -->
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.83 9.504.475.087.68-.206.68-.458 0-.225-.007-.975-.011-1.994-2.782.6-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.463-1.11-1.463-.907-.618.069-.607.069-.607 1.004.07 1.532 1.03 1.532 1.03.89 1.529 2.34 1.089 2.91.833.09-.645.349-1.089.635-1.338-2.22-.253-4.555-1.115-4.555-4.945 0-1.09.39-1.984 1.029-2.682-.103-.253-.446-1.27.098-2.65 0 0 .84-.27 2.75 1.025.798-.222 1.65-.333 2.5-.333.85 0 1.702.111 2.5.333 1.909-1.295 2.747-1.025 2.747-1.025.546 1.38.203 2.398.099 2.65.64.698 1.028 1.592 1.028 2.682 0 3.838-2.339 4.686-4.566 4.935.359.308.678.915.678 1.846 0 1.335-.012 2.415-.012 2.74 0 .254.205.548.685.457C21.14 20.198 24 16.442 24 12.017 24 6.484 19.522 2 14 2h-2Z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.325-.028-3.044-1.852-3.044-1.853 0-2.136 1.445-2.136 2.955v5.658H9.596V9.201h3.413v1.561h.045c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.062 2.062 2.062 0 012.063-2.062c1.13 0 2.063.932 2.063 2.062 0 1.13-.933 2.062-2.063 2.062zM6.949 20.452H3.55V9.201h3.399v11.251z" fill-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
-
-                <!-- Personal Statement -->
-                <div class="md:w-2/3 fade-in-up delay-300">
-                    <p class="text-lg leading-relaxed mb-6">
-                        With 8+ years of experience, I excel at both meticulously identifying software defects as a
-                        <span class="font-semibold text-blue-300">Professional Tester</span> and strategically aligning business needs with technical solutions as an
-                        <span class="font-semibold text-blue-300">IT Business Analyst</span>. My dual expertise ensures robust, user-centric products and streamlined development cycles.
+                <!-- Professional Summary -->
+                <div class="w-full md:w-2/3 animate-on-scroll animate-delay-200">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        Hello! I'm [Your Name], a highly motivated and results-driven professional with a dual expertise in Software Testing and IT Business Analysis. With [X] years of experience, I am passionate about ensuring the delivery of high-quality, robust software solutions that truly meet business needs.
                     </p>
-                    <p class="text-lg leading-relaxed">
-                        I am passionate about delivering high-quality software and facilitating effective communication between stakeholders and development teams. My goal is to bridge the gap between business vision and technical execution, ensuring projects are delivered on time, within budget, and to the highest standards of quality.
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        As a Tester, I excel in designing comprehensive test strategies, executing various testing types (functional, non-functional, regression, automation), and identifying critical defects to enhance product stability. My meticulous approach and keen eye for detail ensure that software is not just functional, but also user-friendly and reliable.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Concurrently, my role as an IT Business Analyst allows me to bridge the gap between business stakeholders and technical teams. I am adept at gathering and analyzing requirements, creating detailed documentation, and facilitating communication to ensure project alignment and successful implementation. I thrive on translating complex business challenges into clear, actionable technical specifications.
                     </p>
                 </div>
             </div>
@@ -146,415 +227,284 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 px-6 bg-gray-900 text-white">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl font-bold text-center mb-12 text-blue-400">My Expertise</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Tester Skills -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg fade-in-up">
-                    <h3 class="text-3xl font-semibold mb-6 text-center text-blue-300">Tester Skills</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">Manual Testing</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span class="text-lg font-medium">Automated Testing (Selenium, Cypress)</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">Performance Testing (JMeter)</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">Security Testing</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">Regression Testing</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">User Acceptance Testing (UAT)</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 11v10"/></svg>
-                            <span class="text-lg font-medium">Test Management (Jira, TestRail)</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v2"/><path d="M12 18v4"/></svg>
-                            <span class="text-lg font-medium">Bug Reporting & Tracking</span>
-                        </div>
-                    </div>
+    <section id="skills" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Category 1: Software Testing -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Software Testing</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Test Case Design & Execution</li>
+                        <li>Manual & Automated Testing (Selenium, Cypress)</li>
+                        <li>Performance Testing (JMeter)</li>
+                        <li>Security Testing Basics</li>
+                        <li>Regression Testing</li>
+                        <li>Defect Management (Jira, Azure DevOps)</li>
+                        <li>API Testing (Postman)</li>
+                    </ul>
                 </div>
 
-                <!-- IT BA Skills -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg fade-in-up delay-200">
-                    <h3 class="text-3xl font-semibold mb-6 text-center text-blue-300">IT BA Skills</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v2"/><path d="M12 18v4"/></svg>
-                            <span class="text-lg font-medium">Requirements Elicitation</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span class="text-lg font-medium">Business Process Modeling (BPMN)</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 11v10"/></svg>
-                            <span class="text-lg font-medium">Functional & Non-Functional Specs</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span class="text-lg font-medium">User Stories & Use Cases</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                            <span class="text-lg font-medium">Stakeholder Management</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v2"/><path d="M12 18v4"/></svg>
-                            <span class="text-lg font-medium">Solution Design</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span class="text-lg font-medium">Data Flow Diagrams</span>
-                        </div>
-                        <div class="skill-card flex items-center p-4 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 text-blue-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 11v10"/></svg>
-                            <span class="text-lg font-medium">Agile Methodologies</span>
-                        </div>
-                    </div>
+                <!-- Skill Category 2: Business Analysis -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Business Analysis</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Requirements Gathering & Elicitation</li>
+                        <li>Stakeholder Management</li>
+                        <li>Process Modeling (BPMN)</li>
+                        <li>Use Case & User Story Development</li>
+                        <li>Data Analysis & Reporting</li>
+                        <li>Agile Methodologies (Scrum, Kanban)</li>
+                        <li>Documentation (BRD, FSD)</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 3: Tools & Technologies -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Tools & Technologies</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Jira, Confluence, Trello</li>
+                        <li>SQL, MongoDB</li>
+                        <li>HTML, CSS, JavaScript</li>
+                        <li>Git, GitHub/GitLab</li>
+                        <li>Microsoft Office Suite (Excel, Visio)</li>
+                        <li>Figma (Basic UI/UX understanding)</li>
+                        <li>Cloud Platforms (AWS/Azure basics)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-6 bg-gray-800 text-white">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl font-bold text-center mb-12 text-blue-400">My Work & Projects</h2>
-
-            <div class="relative bg-gray-700 rounded-xl shadow-lg p-6 md:p-10 mb-12">
-                <!-- Project Image Slider -->
-                <div class="relative w-full h-64 md:h-96 overflow-hidden rounded-lg mb-6">
-                    <img id="project-image" src="" alt="" class="w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0" onload="this.classList.add('opacity-100'); this.previousElementSibling.style.display = 'none';" onerror="this.src='https://placehold.co/800x500/FF0000/FFFFFF?text=Image+Load+Error'; this.classList.add('opacity-100'); this.previousElementSibling.style.display = 'none';">
-                    <!-- Loading spinner -->
-                    <div id="image-spinner" class="absolute inset-0 flex items-center justify-center bg-gray-800">
-                        <div class="spinner"></div>
-                    </div>
-                    <button id="prev-project" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-all duration-300" aria-label="Previous Project">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><polyline points="15 18 9 12 15 6"/></svg>
-                    </button>
-                    <button id="next-project" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-all duration-300" aria-label="Next Project">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                </div>
-
-                <!-- Project Details -->
-                <div class="text-center">
-                    <h3 id="project-title" class="text-3xl font-semibold text-blue-300 mb-3"></h3>
-                    <p id="project-description" class="text-lg text-gray-300 mb-4"></p>
-                    <div id="project-tech-role" class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-md mb-4">
-                        <span id="project-role" class="bg-blue-600 px-3 py-1 rounded-full font-medium"></span>
-                        <span id="project-technologies" class="bg-gray-600 px-3 py-1 rounded-full font-medium"></span>
+    <section id="projects" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project1">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=E-commerce+Platform" alt="Project 1 Thumbnail: E-commerce Platform" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">E-commerce Platform Optimization</h3>
+                        <p class="text-gray-300 text-sm">Enhanced user experience and system stability through comprehensive testing and business process re-engineering.</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Project Thumbnails/Indicators -->
-            <div id="project-indicators" class="flex justify-center space-x-3 mt-8">
-                <!-- Indicators will be dynamically generated here -->
+                <!-- Project Card 2 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project2">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Mobile+App+QA" alt="Project 2 Thumbnail: Mobile App QA" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Mobile Banking App QA & BA</h3>
+                        <p class="text-gray-300 text-sm">Led QA efforts and gathered requirements for new features in a secure mobile banking application.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project3">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=CRM+System+Upgrade" alt="Project 3 Thumbnail: CRM System Upgrade" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">CRM System Upgrade & Integration</h3>
+                        <p class="text-gray-300 text-sm">Facilitated the upgrade of a legacy CRM system, ensuring seamless data migration and new feature integration.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-400 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project4">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Data+Analytics+Dashboard" alt="Project 4 Thumbnail: Data Analytics Dashboard" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Data Analytics Dashboard Development</h3>
+                        <p class="text-gray-300 text-sm">Defined requirements and tested a new data analytics dashboard for business intelligence.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalTitle" class="text-3xl font-bold text-blue-400 mb-4"></h3>
+            <p id="modalDescription" class="text-gray-300 mb-4"></p>
+            <p class="text-gray-400 mb-2"><strong>Technologies:</strong> <span id="modalTech"></span></p>
+            <p class="text-gray-400 mb-2"><strong>My Role:</strong> <span id="modalRole"></span></p>
+            <p class="text-gray-400 mb-2"><strong>Key Achievements:</strong> <span id="modalAchievements"></span></p>
+            <img id="modalImage" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mt-6">
+        </div>
+    </div>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-gray-900 text-white">
-        <div class="container mx-auto max-w-xl">
-            <h2 class="text-4xl font-bold text-center mb-12 text-blue-400">Get In Touch</h2>
-
-            <form id="contact-form" class="bg-gray-800 p-8 rounded-xl shadow-lg space-y-6">
-                <div>
-                    <label for="name" class="block text-lg font-medium text-gray-300 mb-2">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200"
-                    />
-                </div>
-                <div>
-                    <label for="email" class="block text-lg font-medium text-gray-300 mb-2">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200"
-                    />
-                </div>
-                <div>
-                    <label for="subject" class="block text-lg font-medium text-gray-300 mb-2">Subject</label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        required
-                        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200"
-                    />
-                </div>
-                <div>
-                    <label for="message" class="block text-lg font-medium text-gray-300 mb-2">Message</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        required
-                        class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200"
-                    ></textarea>
-                </div>
-                <button
-                    type="submit"
-                    id="submit-button"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-xl shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                >
-                    Send Message
-                </button>
-
-                <p id="form-status" class="text-center mt-4 text-lg"></p>
-            </form>
-
-            <div class="flex justify-center space-x-6 mt-12">
-                <a
-                    href="https://www.linkedin.com/in/yourprofile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
-                    aria-label="LinkedIn Profile"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a
-                    href="https://github.com/yourprofile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
-                    aria-label="GitHub Profile"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                </a>
-                <a
-                    href="mailto:youremail@example.com"
-                    class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
-                    aria-label="Email Me"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </a>
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">Get In Touch</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100">
+                <form id="contactForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-300 text-lg font-medium mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 text-lg font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your.email@example.com" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-300 text-lg font-medium mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Subject of your message" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-300 text-lg font-medium mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Send Message</button>
+                    <p id="formMessage" class="text-center mt-4 text-sm"></p>
+                </form>
             </div>
         </div>
     </section>
 
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 py-8 text-center text-gray-400 text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+            <p>Designed with <span class="text-red-500">&hearts;</span> by a Professional Designer</p>
+        </div>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Navigation Logic ---
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const sectionId = e.target.dataset.section;
-                    const section = document.getElementById(sectionId);
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                        updateActiveNavLink(sectionId);
-                    }
-                });
-            });
+        // JavaScript for Hero Section Background Slider
+        const sliderImages = document.querySelectorAll('.hero-background-slider img');
+        let currentImageIndex = 0;
 
-            const updateActiveNavLink = (activeId) => {
-                navItems.forEach(item => {
-                    if (item.dataset.section === activeId) {
-                        item.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-                        item.classList.remove('text-gray-300', 'hover:text-blue-400', 'hover:bg-gray-800');
-                    } else {
-                        item.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-                        item.classList.add('text-gray-300', 'hover:text-blue-400', 'hover:bg-gray-800');
-                    }
-                });
-            };
+        function changeBackgroundImage() {
+            sliderImages[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
+            sliderImages[currentImageIndex].classList.add('active');
+        }
 
-            // Initial active link setup and scroll listener for updating active link
-            const sections = document.querySelectorAll('section[id]');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.7 // Highlight when 70% of the section is visible
-            };
+        // Start the slider
+        setInterval(changeBackgroundImage, 3000); // Change image every 3 seconds
 
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        updateActiveNavLink(entry.target.id);
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-
-            // --- Hero Section Animations ---
-            setTimeout(() => {
-                document.getElementById('hero-headline').classList.add('show');
-                document.getElementById('hero-tagline-1').classList.add('show');
-                document.getElementById('hero-tagline-2').classList.add('show');
-                document.getElementById('hero-cta').classList.add('show');
-            }, 100); // Small delay to ensure CSS is loaded
-
-            // --- Section Visibility Animations (About Me, Skills) ---
-            const animateOnScroll = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once animated
-                    }
-                });
-            };
-
-            const sectionVisibilityObserver = new IntersectionObserver(animateOnScroll, {
-                threshold: 0.1 // Trigger when 10% of the section is visible
-            });
-
-            document.querySelectorAll('.fade-in-up').forEach(element => {
-                sectionVisibilityObserver.observe(element);
-            });
-
-            // --- Projects Section Logic ---
-            const projects = [
-                {
-                    title: 'E-commerce Platform Testing',
-                    description: 'Led end-to-end testing for a large-scale e-commerce platform, ensuring seamless user experience and robust functionality across web and mobile.',
-                    image: 'https://placehold.co/800x500/1A202C/FFFFFF?text=E-commerce+Testing',
-                    role: 'Lead QA Engineer',
-                    technologies: 'Selenium, Jira, TestRail, Performance Testing, Security Testing',
-                },
-                {
-                    title: 'CRM System Business Analysis',
-                    description: 'Conducted comprehensive requirements gathering and analysis for a new CRM system, translating business needs into detailed functional specifications.',
-                    image: 'https://placehold.co/800x500/1A202C/FFFFFF?text=CRM+BA',
-                    role: 'IT Business Analyst',
-                    technologies: 'UML, BPMN, Confluence, Stakeholder Workshops',
-                },
-                {
-                    title: 'Mobile App Quality Assurance',
-                    description: 'Implemented automated testing frameworks for a cross-platform mobile application, significantly reducing regression defects and release cycles.',
-                    image: 'https://placehold.co/800x500/1A202C/FFFFFF?text=Mobile+QA',
-                    role: 'Senior Tester',
-                    technologies: 'Appium, Cypress, Jira, Agile Scrum',
-                },
-                {
-                    title: 'Healthcare System Integration BA',
-                    description: 'Facilitated integration of disparate healthcare systems by defining data mapping, API requirements, and process flows, ensuring data integrity and system interoperability.',
-                    image: 'https://placehold.co/800x500/1A202C/FFFFFF?text=Healthcare+Integration',
-                    role: 'IT Business Analyst',
-                    technologies: 'HL7, FHIR, Visio, Requirements Traceability',
-                },
-            ];
-
-            let currentProjectIndex = 0;
-
-            const projectImage = document.getElementById('project-image');
-            const imageSpinner = document.getElementById('image-spinner');
-            const projectTitle = document.getElementById('project-title');
-            const projectDescription = document.getElementById('project-description');
-            const projectRole = document.getElementById('project-role');
-            const projectTechnologies = document.getElementById('project-technologies');
-            const projectIndicatorsContainer = document.getElementById('project-indicators');
-
-            const updateProjectDisplay = () => {
-                const project = projects[currentProjectIndex];
-
-                // Hide image and show spinner while loading new image
-                projectImage.classList.remove('opacity-100');
-                imageSpinner.style.display = 'flex';
-
-                projectImage.src = project.image;
-                projectImage.alt = project.title;
-                projectTitle.textContent = project.title;
-                projectDescription.textContent = project.description;
-                projectRole.textContent = `Role: ${project.role}`;
-                projectTechnologies.textContent = `Tech: ${project.technologies}`;
-
-                updateProjectIndicators();
-            };
-
-            const updateProjectIndicators = () => {
-                projectIndicatorsContainer.innerHTML = ''; // Clear existing indicators
-                projects.forEach((_, index) => {
-                    const button = document.createElement('button');
-                    button.classList.add('w-3', 'h-3', 'rounded-full', 'transition-all', 'duration-300');
-                    if (index === currentProjectIndex) {
-                        button.classList.add('bg-blue-500', 'w-4', 'h-4');
-                        button.classList.remove('bg-gray-500', 'hover:bg-gray-400');
-                    } else {
-                        button.classList.add('bg-gray-500', 'hover:bg-gray-400');
-                        button.classList.remove('bg-blue-500', 'w-4', 'h-4');
-                    }
-                    button.setAttribute('aria-label', `Go to project ${index + 1}`);
-                    button.addEventListener('click', () => {
-                        currentProjectIndex = index;
-                        updateProjectDisplay();
-                    });
-                    projectIndicatorsContainer.appendChild(button);
-                });
-            };
-
-            document.getElementById('next-project').addEventListener('click', () => {
-                currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-                updateProjectDisplay();
-            });
-
-            document.getElementById('prev-project').addEventListener('click', () => {
-                currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
-                updateProjectDisplay();
-            });
-
-            // Initial load of the first project
-            updateProjectDisplay();
-
-            // --- Contact Form Logic ---
-            const contactForm = document.getElementById('contact-form');
-            const submitButton = document.getElementById('submit-button');
-            const formStatus = document.getElementById('form-status');
-
-            contactForm.addEventListener('submit', async (e) => {
+        // JavaScript for Smooth Scrolling Navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<div class="spinner h-6 w-6 border-white mr-3"></div> Sending...';
-                formStatus.textContent = ''; // Clear previous status
 
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                // For demonstration, we'll just show success/error randomly
-                const success = Math.random() > 0.3; // 70% chance of success
-
-                if (success) {
-                    formStatus.classList.remove('text-red-500');
-                    formStatus.classList.add('text-green-500');
-                    formStatus.textContent = 'Message sent successfully! Thank you.';
-                    contactForm.reset(); // Clear form
-                } else {
-                    formStatus.classList.remove('text-green-500');
-                    formStatus.classList.add('text-red-500');
-                    formStatus.textContent = 'Failed to send message. Please try again later.';
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - document.querySelector('header').offsetHeight, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
                 }
-
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Send Message';
             });
+        });
+
+        // JavaScript for Scroll-Triggered Animations (using IntersectionObserver)
+        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        animateOnScrollElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // JavaScript for Project Modal
+        const projectModal = document.getElementById('projectModal');
+        const closeButton = document.querySelector('.close-button');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Project data (can be fetched from an API in a real scenario)
+        const projectsData = {
+            project1: {
+                title: "E-commerce Platform Optimization",
+                description: "This project involved a complete overhaul of an existing e-commerce platform. My role as a Tester focused on ensuring the stability and performance of new features, while as an IT BA, I streamlined the checkout process and improved inventory management workflows. We achieved a 20% reduction in reported bugs post-launch and a 15% increase in conversion rates due to improved user experience.",
+                technologies: "Selenium, Jira, SQL, Shopify API, Figma",
+                role: "Lead QA Engineer & Business Analyst",
+                achievements: "Reduced critical bugs by 20%, improved checkout conversion by 15%, streamlined inventory management.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=E-commerce+Platform+Detail"
+            },
+            project2: {
+                title: "Mobile Banking App QA & BA",
+                description: "I was instrumental in the development of a new mobile banking application. My responsibilities included creating detailed test plans for security and usability, conducting extensive manual and automated testing, and gathering user requirements for new features like biometric login and personalized financial insights. The app launched with minimal post-release defects and received positive user feedback.",
+                technologies: "Appium, Postman, Confluence, Swift/Kotlin (understanding)",
+                role: "Mobile QA Specialist & IT Business Analyst",
+                achievements: "Ensured secure biometric login, facilitated smooth feature rollout, achieved high user satisfaction.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=Mobile+App+Detail"
+            },
+            project3: {
+                title: "CRM System Upgrade & Integration",
+                description: "This project focused on upgrading a legacy CRM system to a modern cloud-based solution and integrating it with various marketing and sales tools. My BA role involved mapping existing processes to the new system and defining integration requirements. As a Tester, I validated data migration accuracy and ensured seamless functionality across integrated modules. The project resulted in a 30% efficiency gain for sales teams.",
+                technologies: "Salesforce, MuleSoft, Jira, SQL Server, Excel",
+                role: "Business Analyst & Integration Tester",
+                achievements: "Improved sales team efficiency by 30%, ensured data integrity during migration, seamless system integration.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=CRM+System+Detail"
+            },
+            project4: {
+                title: "Data Analytics Dashboard Development",
+                description: "I collaborated with data scientists and developers to create an interactive data analytics dashboard for executive decision-making. My BA duties included defining key performance indicators (KPIs) and visualization requirements. As a Tester, I validated data accuracy, dashboard performance, and user experience. The dashboard provided critical insights, leading to data-driven strategic decisions.",
+                technologies: "Tableau, Python (Pandas), SQL, Power BI, Agile Scrum",
+                role: "Business Analyst & Data Quality Assurance",
+                achievements: "Enabled data-driven decisions, ensured dashboard accuracy, improved reporting efficiency.",
+                image: "https://placehold.co/800x500/374151/d1d5db?text=Dashboard+Detail"
+            }
+        };
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.dataset.projectId;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    document.getElementById('modalTitle').textContent = project.title;
+                    document.getElementById('modalDescription').textContent = project.description;
+                    document.getElementById('modalTech').textContent = project.technologies;
+                    document.getElementById('modalRole').textContent = project.role;
+                    document.getElementById('modalAchievements').textContent = project.achievements;
+                    document.getElementById('modalImage').src = project.image;
+                    projectModal.style.display = 'flex'; // Show the modal
+                }
+            });
+        });
+
+        closeButton.addEventListener('click', () => {
+            projectModal.style.display = 'none'; // Hide the modal
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+
+        // Basic Contact Form Submission (no backend)
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            // Simulate form submission success
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.classList.remove('text-red-500');
+            formMessage.classList.add('text-green-500');
+            contactForm.reset(); // Clear the form
+
+            // You would typically send this data to a backend server here
+            // Example: fetch('/api/contact', { method: 'POST', body: new FormData(this) })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
