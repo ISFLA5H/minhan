@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | [Your Name] - Software Tester & IT Business Analyst</title>
+    
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for professional typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles to enhance Tailwind for a light theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Light gray background */
+            color: #212529; /* Dark text color */
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #007BFF; /* Changed accent to a professional blue */
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #007BFF;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-grow {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+
+        /* Accent color */
+        .accent-color {
+            color: #007BFF;
+        }
+        .accent-bg {
+            background-color: #007BFF;
+        }
+        .accent-border {
+            border-color: #007BFF;
+        }
+
+        /* Scroll-triggered reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animated underline */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #007BFF;
+            transform-origin: bottom right;
+            transition: transform 0.4s ease-out;
+        }
+        .reveal.visible .animated-underline::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* 3D Flip Card for Expertise section */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #E5E7EB; /* Lighter border */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Infinite Marquee for Toolbox */
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: flex;
+            animation: scroll 40s linear infinite;
+        }
+        .marquee:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F8F9FA;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-line {
+            width: 1px;
+            height: 100px;
+            background-color: #007BFF;
+            animation: load-line 1.5s ease-in-out forwards;
+        }
+        @keyframes load-line {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-line"></div>
+    </div>
+
+    <div class="container mx-auto px-6 md:px-10 max-w-6xl">
+
+        <!-- SECTION 1: HERO -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-start text-left">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight reveal">
+                Hello, I'm <span class="accent-color">[Your Name]</span>.
+            </h1>
+            <h2 class="text-2xl md:text-4xl lg:text-5xl mt-4 font-medium text-slate-800 reveal" style="transition-delay: 200ms;">
+                <span id="role-typer"></span><span class="inline-block w-1 h-8 md:h-12 bg-slate-800 animate-pulse ml-2"></span>
+            </h2>
+            <p class="mt-8 max-w-2xl text-slate-600 text-lg reveal" style="transition-delay: 400ms;">
+                I build software quality and bridge business vision, turning complex ideas into flawless tech products.
+            </p>
+            <a href="#contact" class="interactive mt-12 reveal" style="transition-delay: 600ms;">
+                <button class="px-8 py-3 border-2 accent-border text-lg font-bold accent-color hover:accent-bg hover:text-white transition-colors duration-300 rounded-lg">
+                    Get In Touch
+                </button>
+            </a>
+        </section>
+
+        <!-- SECTION 2: ABOUT -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-20 items-center">
+                <div class="md:col-span-2 reveal">
+                    <div class="w-full h-auto aspect-square rounded-lg overflow-hidden group shadow-lg">
+                        <img src="https://placehold.co/600x600/E5E7EB/212529?text=Your+Photo" 
+                             alt="A portrait of [Your Name]" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out transform group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="md:col-span-3 reveal" style="transition-delay: 200ms;">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+                    <p class="text-slate-700 text-lg mb-4">
+                        With <strong class="text-slate-900">[Number]</strong> years of experience, I am the solid bridge between technical teams and stakeholders. My passion lies in diving deep into details to <span class="animated-underline text-slate-900 font-semibold">ensure software quality</span> while simultaneously <span class="animated-underline text-slate-900 font-semibold">deciphering business requirements</span> to create sustainable value.
+                    </p>
+                    <p class="text-slate-700 text-lg">
+                        I believe that a great product is built on a foundation of understanding and a relentless testing process.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXPERTISE -->
+        <section id="expertise" class="py-20 md:py-32">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">Dual Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Tester Column -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 text-center accent-color">Software Tester</h3>
+                    <div class="space-y-6">
+                        <div class="flip-card h-48 interactive">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front flex flex-col justify-center items-center text-center">
+                                    <h4 class="text-xl font-bold">Automation Testing</h4>
+                                    <p class="text-slate-600 mt-2">Building robust test frameworks</p>
+                                </div>
+                                <div class="flip-card-back flex flex-col justify-center items-center text-center">
+                                    <h5 class="font-bold">Tools:</h5>
+                                    <p class="text-slate-700">Selenium, Cypress, Playwright, Katalon Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card h-48 interactive">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front flex flex-col justify-center items-center text-center">
+                                    <h4 class="text-xl font-bold">API Testing</h4>
+                                    <p class="text-slate-600 mt-2">Ensuring system integrity</p>
+                                </div>
+                                <div class="flip-card-back flex flex-col justify-center items-center text-center">
+                                    <h5 class="font-bold">Tools:</h5>
+                                    <p class="text-slate-700">Postman, REST Assured, Swagger</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BA Column -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold mb-6 text-center accent-color">IT Business Analyst</h3>
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
+                            <h4 class="text-xl font-bold">Requirement Analysis</h4>
+                            <p class="text-slate-600 mt-2">Eliciting, clarifying, and systemizing stakeholder needs.</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
+                            <h4 class="text-xl font-bold">Process Modeling</h4>
+                            <p class="text-slate-600 mt-2">Using UML & BPMN to visualize workflows and systems.</p>
+                        </div>
+                         <div class="p-6 rounded-lg border border-slate-200 bg-white shadow-sm">
+                            <h4 class="text-xl font-bold">Documentation</h4>
+                            <p class="text-slate-600 mt-2">Writing clear SRS, User Stories, and Use Cases.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: PROJECTS -->
+        <section id="projects" class="py-20 md:py-32">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold accent-color">Project Name 1</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: Automation Tester]</p>
+                    <p class="mt-4 text-slate-600">Built an automation testing framework from scratch, which reduced regression testing time by 80% and increased test coverage by 40%.</p>
+                </div>
+                <!-- Project 2 -->
+                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold accent-color">Project Name 2</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: IT Business Analyst]</p>
+                    <p class="mt-4 text-slate-600">Analyzed and redefined the core business workflow for an e-commerce platform, leading to a 20% increase in successful conversion rates.</p>
+                </div>
+                 <!-- Project 3 -->
+                <div class="reveal border border-slate-200 bg-white rounded-lg p-6 group interactive transition-all duration-300 hover:border-accent-color hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold accent-color">Project Name 3</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">[Role: Tester & BA]</p>
+                    <p class="mt-4 text-slate-600">Led both requirements analysis and quality assurance for a new critical feature, ensuring the final product was both stable and perfectly aligned with user needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TOOLBOX -->
+        <section id="toolbox" class="py-20 md:py-32">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal">My Toolbox</h2>
+            <div class="marquee reveal">
+                <div class="marquee-content">
+                    <!-- Add logos of tools. Repeat them to create a seamless loop -->
+                    <div class="flex items-center space-x-16 px-8">
+                        <span class="text-4xl font-bold text-slate-400">Jira</span>
+                        <span class="text-4xl font-bold text-slate-400">Selenium</span>
+                        <span class="text-4xl font-bold text-slate-400">Postman</span>
+                        <span class="text-4xl font-bold text-slate-400">SQL</span>
+                        <span class="text-4xl font-bold text-slate-400">Confluence</span>
+                        <span class="text-4xl font-bold text-slate-400">Cypress</span>
+                        <span class="text-4xl font-bold text-slate-400">Figma</span>
+                        <span class="text-4xl font-bold text-slate-400">Git</span>
+                    </div>
+                    <div class="flex items-center space-x-16 px-8">
+                        <span class="text-4xl font-bold text-slate-400">Jira</span>
+                        <span class="text-4xl font-bold text-slate-400">Selenium</span>
+                        <span class="text-4xl font-bold text-slate-400">Postman</span>
+                        <span class="text-4xl font-bold text-slate-400">SQL</span>
+                        <span class="text-4xl font-bold text-slate-400">Confluence</span>
+                        <span class="text-4xl font-bold text-slate-400">Cypress</span>
+                        <span class="text-4xl font-bold text-slate-400">Figma</span>
+                        <span class="text-4xl font-bold text-slate-400">Git</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CONTACT -->
+        <section id="contact" class="py-20 md:py-32 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold reveal">Ready to build the<br>next big thing?</h2>
+            <p class="mt-6 text-lg text-slate-600 max-w-xl mx-auto reveal" style="transition-delay: 200ms;">
+                I'm always looking for new opportunities and challenges. Let's get in touch if you believe we can create something great together.
+            </p>
+            <div class="mt-12 reveal" style="transition-delay: 400ms;">
+                <a href="mailto:your.email@example.com" class="text-2xl md:text-3xl font-bold accent-color hover:underline interactive">
+                    your.email@example.com
+                </a>
+            </div>
+            <div class="mt-8 flex justify-center space-x-8 reveal" style="transition-delay: 600ms;">
+                <a href="#" class="text-slate-500 hover:accent-color transition-colors interactive">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014V8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.71zM4.98 7.414a2.426 2.426 0 100-4.852 2.426 2.426 0 000 4.852zM6.274 16.338H3.686V8.59h2.588v7.748zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="text-slate-500 hover:accent-color transition-colors interactive">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+                </a>
+            </div>
+             <div class="mt-12 reveal" style="transition-delay: 800ms;">
+                <a href="#" class="interactive">
+                    <button class="px-8 py-3 accent-bg text-white text-lg font-bold hover:bg-opacity-80 transition-all duration-300 rounded-lg magnetic-button">
+                        Download My CV
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <footer class="text-center py-8 text-slate-500">
+            <p>&copy; <span id="year"></span> [Your Name]. Designed and developed with ❤️.</p>
+        </footer>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- PRELOADER ---
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            preloader.classList.add('loaded');
+        });
+
+        // --- CUSTOM CURSOR ---
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const interactiveElements = document.querySelectorAll('.interactive, a, button');
+
+        window.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
+        });
+
+        // --- ROLE TYPING ANIMATION ---
+        const typerEl = document.getElementById('role-typer');
+        const roles = ['Software Tester.', 'IT Business Analyst.'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typerEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typerEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+            }
+
+            const typeSpeed = isDeleting ? 75 : 150;
+            setTimeout(type, typeSpeed);
+        }
+        type();
+
+        // --- SCROLL REVEAL ANIMATION ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+        
+        // --- MAGNETIC BUTTON ---
+        const magneticButton = document.querySelector('.magnetic-button');
+        if (magneticButton) {
+            magneticButton.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                this.style.transition = 'transform 0.1s ease-out';
+            });
+            
+            magneticButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'translate(0, 0)';
+                this.style.transition = 'transform 0.3s ease-in-out';
+            });
+        }
+
+        // --- FOOTER YEAR ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+    });
+    </script>
+</body>
+</html>
