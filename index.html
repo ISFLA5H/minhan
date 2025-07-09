@@ -3,508 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Professional Tester & IT BA</title>
-    <!-- Tailwind CSS CDN for modern styling and responsiveness -->
+    <title>Professional Tester & IT BA Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter for a clean, modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons (optional, using simple SVGs for now) -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
         }
-
-        /* Custom CSS for background slider */
-        .hero-background-slider {
-            position: absolute;
+        
+        .tech-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; /* Send to back */
-        }
-
-        .hero-background-slider img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
-        }
-
-        .hero-background-slider img.active {
-            opacity: 1;
-        }
-
-        /* Overlay for text readability */
-        .hero-overlay {
-            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
+            background: linear-gradient(rgba(30, 27, 75, 0.9), rgba(30, 27, 75, 0.9)), 
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e5ffc49-7fd2-41f2-bc98-1f74cc26a3be.png') center/cover no-repeat;
         }
-
-        /* Scroll-triggered animation classes */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Specific animation delays */
-        .animate-delay-100 { transition-delay: 0.1s; }
-        .animate-delay-200 { transition-delay: 0.2s; }
-        .animate-delay-300 { transition-delay: 0.3s; }
-        .animate-delay-400 { transition-delay: 0.4s; }
-        .animate-delay-500 { transition-delay: 0.5s; }
-
-        /* Custom button styling */
-        .btn-primary {
-            @apply px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out shadow-lg;
-        }
-
-        /* Modal styling */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #1f2937; /* Dark gray background */
-            margin: auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 800px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            position: relative;
-            animation: fadeIn 0.3s ease-out;
-            color: #e5e7eb; /* Light text color */
-        }
-
-        .close-button {
+        
+        .tech-bg::before {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 25px;
-            color: #ccc;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent, rgba(37, 99, 235, 0.1));
+            animation: pulse 15s infinite alternate;
         }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.05); opacity: 0.5; }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
         }
-
-        /* Responsive adjustments for modal */
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .slide-in {
+            animation: slideIn 1s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-item {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .carousel-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .carousel-item.inactive {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.7);
+        }
+        
         @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
-                padding: 20px;
+            .profile-section {
+                flex-direction: column;
             }
-            .close-button {
-                font-size: 30px;
-                top: 10px;
-                right: 20px;
+            
+            .profile-card {
+                margin-bottom: 2rem;
             }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 antialiased">
-
-    <!-- Header Section -->
-    <header class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 shadow-lg py-4">
-        <nav class="container mx-auto flex justify-between items-center px-4">
-            <a href="#home" class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-colors duration-300 rounded-md px-2 py-1">YOUR NAME</a>
-            <ul class="flex space-x-6 md:space-x-8">
-                <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Home</a></li>
-                <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">About</a></li>
-                <li><a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Skills</a></li>
-                <li><a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Projects</a></li>
-                <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium text-lg rounded-md px-2 py-1">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-        <div class="hero-background-slider">
-            <!-- Placeholder images for background slider -->
-            <img src="https://placehold.co/1920x1080/1a202c/e2e8f0?text=Testing+Excellence" alt="Background Image 1: Testing Excellence" class="active">
-            <img src="https://placehold.co/1920x1080/2d3748/cbd5e0?text=IT+BA+Strategy" alt="Background Image 2: IT BA Strategy">
-            <img src="https://placehold.co/1920x1080/4a5568/a0aec0?text=Code+Quality" alt="Background Image 3: Code Quality">
-            <img src="https://placehold.co/1920x1080/2c5282/ffffff?text=Innovation+Driven" alt="Background Image 4: Innovation Driven">
-        </div>
-        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
-
-        <div class="relative z-10 p-6 max-w-4xl mx-auto animate-on-scroll">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
-                Elevating Quality, Driving Innovation
+<body>
+    <div class="tech-bg"></div>
+    
+    <div class="container mx-auto px-4 py-12 md:py-24">
+        <!-- Hero Section -->
+        <section class="text-center mb-20 slide-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                    Professional Tester & IT Business Analyst
+                </span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-200 mb-8 drop-shadow-md">
-                Your Expert Tester & IT Business Analyst
+            <p class="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto">
+                Bridging the gap between technical excellence and business objectives through systematic testing and analytical solutions.
             </p>
-            <a href="#projects" class="btn-primary animate-on-scroll animate-delay-200">View My Work</a>
-        </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section id="about" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
-                <!-- Personal Information Card -->
-                <div class="w-full md:w-1/3 bg-gray-700 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 flex flex-col items-center text-center">
-                    <img src="https://placehold.co/150x150/333/fff?text=Avatar" alt="Your Avatar" class="w-36 h-36 rounded-full object-cover mb-6 border-4 border-blue-400 shadow-md">
-                    <h3 class="text-3xl font-semibold text-white mb-2">Your Full Name</h3>
-                    <p class="text-blue-300 text-lg mb-4">Professional Tester & IT BA</p>
-                    <ul class="text-gray-300 text-left space-y-2 w-full max-w-xs">
-                        <li><strong>Gender:</strong> [Your Gender]</li>
-                        <li><strong>Hometown:</strong> [Your Hometown]</li>
-                        <li><strong>Education:</strong> [Your Highest Degree, University]</li>
-                        <li><strong>Experience:</strong> [X Years] in Software Testing & IT Business Analysis</li>
-                    </ul>
+        </section>
+        
+        <!-- Profile Section -->
+        <section class="flex flex-col md:flex-row gap-8 mb-20 profile-section">
+            <!-- Profile Card -->
+            <div class="w-full md:w-1/3 bg-white/10 backdrop-blur-lg rounded-xl p-8 card profile-card glow-on-hover">
+                <div class="flex flex-col items-center">
+                    <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-500 mb-6 floating">
+                        <img src="https://drive.google.com/file/d/1ac46Pd2p6WGdaTxui6IhSHEWEhELa3Td/view?usp=sharing" alt="Professional portrait of a male IT business analyst in formal attire with a confident expression" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold text-white mb-2">Minh An</h2>
+                    <p class="text-blue-300 mb-6">Junior Tester & IT Business Analyst</p>
+                    
+                    <div class="w-full space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-graduation-cap text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-white">Education</h4>
+                                <p class="text-blue-200">Sai Gon University</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-briefcase text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-white">Experience</h4>
+                                <p class="text-blue-200">3+ years in Software Testing & Business Analysis</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-venus-mars text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-white">Gender</h4>
+                                <p class="text-blue-200">Male</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-home text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-white">Hometown</h4>
+                                <p class="text-blue-200">Ben Tre, Vinh Long City</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="flex space-x-4 mt-6">
-                        <!-- Placeholder for social media icons -->
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.83 9.504.475.087.68-.206.68-.458 0-.225-.007-.975-.011-1.994-2.782.6-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.463-1.11-1.463-.907-.618.069-.607.069-.607 1.004.07 1.532 1.03 1.532 1.03.89 1.529 2.34 1.089 2.91.833.09-.645.349-1.089.635-1.338-2.22-.253-4.555-1.115-4.555-4.945 0-1.09.39-1.984 1.029-2.682-.103-.253-.446-1.27.098-2.65 0 0 .84-.27 2.75 1.025.798-.222 1.65-.333 2.5-.333.85 0 1.702.111 2.5.333 1.909-1.295 2.747-1.025 2.747-1.025.546 1.38.203 2.398.099 2.65.64.698 1.028 1.592 1.028 2.682 0 3.838-2.339 4.686-4.566 4.935.359.308.678.915.678 1.846 0 1.335-.012 2.415-.012 2.74 0 .254.205.548.685.457C21.14 20.198 24 16.442 24 12.017 24 6.484 19.522 2 14 2h-2Z" clip-rule="evenodd" />
-                            </svg>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
+                            <i class="fab fa-linkedin-in text-white"></i>
                         </a>
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.325-.028-3.044-1.852-3.044-1.853 0-2.136 1.445-2.136 2.955v5.658H9.596V9.201h3.413v1.561h.045c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.062 2.062 2.062 0 012.063-2.062c1.13 0 2.063.932 2.063 2.062 0 1.13-.933 2.062-2.063 2.062zM6.949 20.452H3.55V9.201h3.399v11.251z" fill-rule="evenodd" />
-                            </svg>
+                        <a href="https://github.com/ISFLA5H" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
+                            <i class="fab fa-github text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
+                            <i class="fas fa-envelope text-white"></i>
                         </a>
                     </div>
                 </div>
-                <!-- Professional Summary -->
-                <div class="w-full md:w-2/3 animate-on-scroll animate-delay-200">
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                        Hello! I'm [Your Name], a highly motivated and results-driven professional with a dual expertise in Software Testing and IT Business Analysis. With [X] years of experience, I am passionate about ensuring the delivery of high-quality, robust software solutions that truly meet business needs.
-                    </p>
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                        As a Tester, I excel in designing comprehensive test strategies, executing various testing types (functional, non-functional, regression, automation), and identifying critical defects to enhance product stability. My meticulous approach and keen eye for detail ensure that software is not just functional, but also user-friendly and reliable.
-                    </p>
-                    <p class="text-lg text-gray-300 leading-relaxed">
-                        Concurrently, my role as an IT Business Analyst allows me to bridge the gap between business stakeholders and technical teams. I am adept at gathering and analyzing requirements, creating detailed documentation, and facilitating communication to ensure project alignment and successful implementation. I thrive on translating complex business challenges into clear, actionable technical specifications.
-                    </p>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Skill Category 1: Software Testing -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300">
-                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Software Testing</h3>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2">
-                        <li>Test Case Design & Execution</li>
-                        <li>Manual & Automated Testing (Selenium, Cypress)</li>
-                        <li>Performance Testing (JMeter)</li>
-                        <li>Security Testing Basics</li>
-                        <li>Regression Testing</li>
-                        <li>Defect Management (Jira, Azure DevOps)</li>
-                        <li>API Testing (Postman)</li>
-                    </ul>
-                </div>
-
-                <!-- Skill Category 2: Business Analysis -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300">
-                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Business Analysis</h3>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2">
-                        <li>Requirements Gathering & Elicitation</li>
-                        <li>Stakeholder Management</li>
-                        <li>Process Modeling (BPMN)</li>
-                        <li>Use Case & User Story Development</li>
-                        <li>Data Analysis & Reporting</li>
-                        <li>Agile Methodologies (Scrum, Kanban)</li>
-                        <li>Documentation (BRD, FSD)</li>
-                    </ul>
-                </div>
-
-                <!-- Skill Category 3: Tools & Technologies -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300">
-                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Tools & Technologies</h3>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2">
-                        <li>Jira, Confluence, Trello</li>
-                        <li>SQL, MongoDB</li>
-                        <li>HTML, CSS, JavaScript</li>
-                        <li>Git, GitHub/GitLab</li>
-                        <li>Microsoft Office Suite (Excel, Visio)</li>
-                        <li>Figma (Basic UI/UX understanding)</li>
-                        <li>Cloud Platforms (AWS/Azure basics)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
-                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-100 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project1">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=E-commerce+Platform" alt="Project 1 Thumbnail: E-commerce Platform" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-white mb-2">E-commerce Platform Optimization</h3>
-                        <p class="text-gray-300 text-sm">Enhanced user experience and system stability through comprehensive testing and business process re-engineering.</p>
+            
+            <!-- Projects Carousel -->
+            <div class="w-full md:w-2/3 relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-lg p-6">
+                <h3 class="text-2xl font-bold text-white mb-6">My Projects & Work</h3>
+                
+                <div class="relative h-64 md:h-80 overflow-hidden rounded-lg">
+                    <!-- Carousel Items -->
+                    <div class="carousel-item active absolute inset-0">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/20b1206f-0119-4033-836d-569c297d2ed1.png" alt="Dashboard interface showing test cases and results for a banking application project" class="w-full h-full object-cover rounded-lg">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h4 class="text-white font-semibold text-lg">TMS System Testing</h4>
+                            <p class="text-blue-200">Comprehensive testing solution implemented for a major TSM client</p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item inactive absolute inset-0">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9d6ebf16-133e-40fa-8cdb-2e46e3b664ae.png" alt="Team collaboration in an agile environment with digital boards for project management" class="w-full h-full object-cover rounded-lg">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h4 class="text-white font-semibold text-lg">Agile BA Implementation</h4>
+                            <p class="text-blue-200">Transitioned client from waterfall to agile with full requirements analysis</p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item inactive absolute inset-0">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e001f52e-91c8-4c16-81ff-d2b79b55a8ca.png" alt="System architecture diagram with components connected showing complex enterprise solution" class="w-full h-full object-cover rounded-lg">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h4 class="text-white font-semibold text-lg">Warehouse & Warranty System Analysis</h4>
+                            <p class="text-blue-200">Led requirements gathering and analysis for enterprise Warehouse & Warranty implementation</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Controls -->
+                    <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/50 transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/50 transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Indicators -->
+                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
+                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
                     </div>
                 </div>
-
-                <!-- Project Card 2 -->
-                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-200 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project2">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Mobile+App+QA" alt="Project 2 Thumbnail: Mobile App QA" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-white mb-2">Mobile Banking App QA & BA</h3>
-                        <p class="text-gray-300 text-sm">Led QA efforts and gathered requirements for new features in a secure mobile banking application.</p>
+                
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
+                        <h4 class="text-white font-semibold">Test Automation</h4>
+                        <p class="text-blue-200 text-sm">Built frameworks for 50+ automated test cases</p>
                     </div>
-                </div>
-
-                <!-- Project Card 3 -->
-                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-300 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project3">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=CRM+System+Upgrade" alt="Project 3 Thumbnail: CRM System Upgrade" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-white mb-2">CRM System Upgrade & Integration</h3>
-                        <p class="text-gray-300 text-sm">Facilitated the upgrade of a legacy CRM system, ensuring seamless data migration and new feature integration.</p>
+                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
+                        <h4 class="text-white font-semibold">Requirements Analysis</h4>
+                        <p class="text-blue-200 text-sm">Gathered 200+ business requirements</p>
                     </div>
-                </div>
-
-                <!-- Project Card 4 -->
-                <div class="bg-gray-700 rounded-xl shadow-xl overflow-hidden animate-on-scroll animate-delay-400 transform hover:scale-105 transition-transform duration-300 cursor-pointer project-card" data-project-id="project4">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Data+Analytics+Dashboard" alt="Project 4 Thumbnail: Data Analytics Dashboard" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-white mb-2">Data Analytics Dashboard Development</h3>
-                        <p class="text-gray-300 text-sm">Defined requirements and tested a new data analytics dashboard for business intelligence.</p>
+                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
+                        <h4 class="text-white font-semibold">Process Optimization</h4>
+                        <p class="text-blue-200 text-sm">Improved SDLC efficiency by 35%</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Project Detail Modal -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 id="modalTitle" class="text-3xl font-bold text-blue-400 mb-4"></h3>
-            <p id="modalDescription" class="text-gray-300 mb-4"></p>
-            <p class="text-gray-400 mb-2"><strong>Technologies:</strong> <span id="modalTech"></span></p>
-            <p class="text-gray-400 mb-2"><strong>My Role:</strong> <span id="modalRole"></span></p>
-            <p class="text-gray-400 mb-2"><strong>Key Achievements:</strong> <span id="modalAchievements"></span></p>
-            <img id="modalImage" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mt-6">
-        </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section class="mb-20 slide-in" style="animation-delay: 0.2s;">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center">Technical Expertise</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-check-circle text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Test Automation</h3>
+                    <p class="text-blue-200 text-sm">Selenium, Cypress, Playwrite, Katalon</p>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-project-diagram text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Business Analysis</h3>
+                    <p class="text-blue-200 text-sm">JIRA, Confluence, BPMN, UML, BRD, FRS, Figma</p>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Programming</h3>
+                    <p class="text-blue-200 text-sm">PHP, Python, SQL, JavaScript</p>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-cloud text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Using AI In Work</h3>
+                    <p class="text-blue-200 text-sm">ChatGPT, Gemini, Blackbox.ai, Claude</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="slide-in" style="animation-delay: 0.4s;">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center">Client Testimonials</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3f597f1-b805-4f51-b395-bd6a76683b6d.png" alt="Portrait of a satisfied client, male executive in business suit" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Michael Johnson</h4>
+                            <p class="text-blue-200 text-sm">CTO, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 italic">"His attention to detail in requirements analysis saved our project from multiple pitfalls during implementation."</p>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26f70297-2a74-4999-80cc-c255a8473acb.png" alt="Portrait of a satisfied client, female director smiling" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Sarah Williams</h4>
+                            <p class="text-blue-200 text-sm">Product Director, FinTech Corp</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 italic">"The test automation framework he built reduced our regression testing time by 70%."</p>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9a9f853-5933-4420-9b28-56210fbd1982.png" alt="Portrait of a satisfied client, senior manager with glasses" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">David Chen</h4>
+                            <p class="text-blue-200 text-sm">Senior Manager, BankGlobal</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 italic">"His ability to bridge technical and business perspectives was instrumental in our project's success."</p>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
+    
+    <footer class="bg-black/20 py-8 text-center">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-white mb-12 animate-on-scroll">Get In Touch</h2>
-            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-xl animate-on-scroll animate-delay-100">
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-gray-300 text-lg font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" required>
-                    </div>
-                    <div>
-                        <label for="email" class="block text-gray-300 text-lg font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your.email@example.com" required>
-                    </div>
-                    <div>
-                        <label for="subject" class="block text-gray-300 text-lg font-medium mb-2">Subject</label>
-                        <input type="text" id="subject" name="subject" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Subject of your message" required>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-gray-300 text-lg font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="6" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">Send Message</button>
-                    <p id="formMessage" class="text-center mt-4 text-sm"></p>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 py-8 text-center text-gray-400 text-sm">
-        <div class="container mx-auto px-4">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-            <p>Designed with <span class="text-red-500">&hearts;</span> by a Professional Designer</p>
+            <p class="text-blue-300">© 2023 Professional Tester & IT Business Analyst Portfolio</p>
+            <p class="text-blue-400/70 text-sm mt-2">Crafted with expertise in testing and business analysis</p>
         </div>
     </footer>
-
+    
     <script>
-        // JavaScript for Hero Section Background Slider
-        const sliderImages = document.querySelectorAll('.hero-background-slider img');
-        let currentImageIndex = 0;
-
-        function changeBackgroundImage() {
-            sliderImages[currentImageIndex].classList.remove('active');
-            currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
-            sliderImages[currentImageIndex].classList.add('active');
-        }
-
-        // Start the slider
-        setInterval(changeBackgroundImage, 3000); // Change image every 3 seconds
-
-        // JavaScript for Smooth Scrolling Navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - document.querySelector('header').offsetHeight, // Adjust for fixed header
+        // Auto-sliding Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicators div');
+            let currentIndex = 0;
+            
+            // Initialize first item as active
+            updateCarousel();
+            
+            // Auto slide every 3 seconds
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            }, 3000);
+            
+            // Previous button
+            document.querySelector('.carousel-prev').addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            // Next button
+            document.querySelector('.carousel-next').addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            // Indicator clicks
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            function updateCarousel() {
+                // Update items
+                carouselItems.forEach((item, index) => {
+                    if (index === currentIndex) {
+                        item.classList.add('active');
+                        item.classList.remove('inactive');
+                    } else {
+                        item.classList.add('inactive');
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('bg-blue-500');
+                        indicator.classList.remove('bg-white/30');
+                    } else {
+                        indicator.classList.add('bg-white/30');
+                        indicator.classList.remove('bg-blue-500');
+                    }
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
-                }
+                });
             });
-        });
-
-        // JavaScript for Scroll-Triggered Animations (using IntersectionObserver)
-        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Stop observing once animated
-                }
-            });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
-
-        animateOnScrollElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // JavaScript for Project Modal
-        const projectModal = document.getElementById('projectModal');
-        const closeButton = document.querySelector('.close-button');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        // Project data (can be fetched from an API in a real scenario)
-        const projectsData = {
-            project1: {
-                title: "E-commerce Platform Optimization",
-                description: "This project involved a complete overhaul of an existing e-commerce platform. My role as a Tester focused on ensuring the stability and performance of new features, while as an IT BA, I streamlined the checkout process and improved inventory management workflows. We achieved a 20% reduction in reported bugs post-launch and a 15% increase in conversion rates due to improved user experience.",
-                technologies: "Selenium, Jira, SQL, Shopify API, Figma",
-                role: "Lead QA Engineer & Business Analyst",
-                achievements: "Reduced critical bugs by 20%, improved checkout conversion by 15%, streamlined inventory management.",
-                image: "https://placehold.co/800x500/374151/d1d5db?text=E-commerce+Platform+Detail"
-            },
-            project2: {
-                title: "Mobile Banking App QA & BA",
-                description: "I was instrumental in the development of a new mobile banking application. My responsibilities included creating detailed test plans for security and usability, conducting extensive manual and automated testing, and gathering user requirements for new features like biometric login and personalized financial insights. The app launched with minimal post-release defects and received positive user feedback.",
-                technologies: "Appium, Postman, Confluence, Swift/Kotlin (understanding)",
-                role: "Mobile QA Specialist & IT Business Analyst",
-                achievements: "Ensured secure biometric login, facilitated smooth feature rollout, achieved high user satisfaction.",
-                image: "https://placehold.co/800x500/374151/d1d5db?text=Mobile+App+Detail"
-            },
-            project3: {
-                title: "CRM System Upgrade & Integration",
-                description: "This project focused on upgrading a legacy CRM system to a modern cloud-based solution and integrating it with various marketing and sales tools. My BA role involved mapping existing processes to the new system and defining integration requirements. As a Tester, I validated data migration accuracy and ensured seamless functionality across integrated modules. The project resulted in a 30% efficiency gain for sales teams.",
-                technologies: "Salesforce, MuleSoft, Jira, SQL Server, Excel",
-                role: "Business Analyst & Integration Tester",
-                achievements: "Improved sales team efficiency by 30%, ensured data integrity during migration, seamless system integration.",
-                image: "https://placehold.co/800x500/374151/d1d5db?text=CRM+System+Detail"
-            },
-            project4: {
-                title: "Data Analytics Dashboard Development",
-                description: "I collaborated with data scientists and developers to create an interactive data analytics dashboard for executive decision-making. My BA duties included defining key performance indicators (KPIs) and visualization requirements. As a Tester, I validated data accuracy, dashboard performance, and user experience. The dashboard provided critical insights, leading to data-driven strategic decisions.",
-                technologies: "Tableau, Python (Pandas), SQL, Power BI, Agile Scrum",
-                role: "Business Analyst & Data Quality Assurance",
-                achievements: "Enabled data-driven decisions, ensured dashboard accuracy, improved reporting efficiency.",
-                image: "https://placehold.co/800x500/374151/d1d5db?text=Dashboard+Detail"
-            }
-        };
-
-        projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const projectId = card.dataset.projectId;
-                const project = projectsData[projectId];
-
-                if (project) {
-                    document.getElementById('modalTitle').textContent = project.title;
-                    document.getElementById('modalDescription').textContent = project.description;
-                    document.getElementById('modalTech').textContent = project.technologies;
-                    document.getElementById('modalRole').textContent = project.role;
-                    document.getElementById('modalAchievements').textContent = project.achievements;
-                    document.getElementById('modalImage').src = project.image;
-                    projectModal.style.display = 'flex'; // Show the modal
-                }
-            });
-        });
-
-        closeButton.addEventListener('click', () => {
-            projectModal.style.display = 'none'; // Hide the modal
-        });
-
-        // Close modal when clicking outside of it
-        window.addEventListener('click', (event) => {
-            if (event.target == projectModal) {
-                projectModal.style.display = 'none';
-            }
-        });
-
-        // Basic Contact Form Submission (no backend)
-        const contactForm = document.getElementById('contactForm');
-        const formMessage = document.getElementById('formMessage');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent actual form submission
-
-            // Simulate form submission success
-            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
-            formMessage.classList.remove('text-red-500');
-            formMessage.classList.add('text-green-500');
-            contactForm.reset(); // Clear the form
-
-            // You would typically send this data to a backend server here
-            // Example: fetch('/api/contact', { method: 'POST', body: new FormData(this) })
-            // .then(response => response.json())
-            // .then(data => console.log(data))
-            // .catch(error => console.error('Error:', error));
+            
+            // Animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.slide-in');
+                elements.forEach(el => {
+                    const elementPosition = el.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateX(0)';
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initialize
         });
     </script>
 </body>
