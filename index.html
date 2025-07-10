@@ -1595,6 +1595,12 @@
       const formStatus = document.getElementById('formStatus');
       const draftIndicator = document.getElementById('draftIndicator');
       const scriptURL = "https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec"
+      const formData = new FormData(contactForm); // Tạo đối tượng FormData từ form
+    
+      // Lặp qua các cặp key-value trong FormData
+      for (let [name, value] of formData.entries()) {
+        console.log(`${name}: ${value}`);
+      }
       
       // Auto-save draft to local storage
       const formInputs = contactForm.querySelectorAll('input, textarea');
