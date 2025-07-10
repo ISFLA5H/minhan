@@ -1594,7 +1594,6 @@
       const contactForm = document.getElementById('contactForm');
       const formStatus = document.getElementById('formStatus');
       const draftIndicator = document.getElementById('draftIndicator');
-      const formData = new FormData(contactForm);
       const scriptURL = "https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec"
       
       // Auto-save draft to local storage
@@ -1635,7 +1634,7 @@
         
         // Simulate API call (for prototype)
         setTimeout(() => {
-          fetch(scriptURL, { method: 'POST', body: formData}).then(response => {
+          fetch(scriptURL, { method: 'POST', body: formInputs}).then(response => {
               // Kiểm tra response.ok để xem mã trạng thái HTTP có nằm trong khoảng 200-299 không
               if (!response.ok) {
                   // Nếu server trả về lỗi (ví dụ: 400, 500)
