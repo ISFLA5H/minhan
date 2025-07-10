@@ -1635,12 +1635,29 @@
         
         // Simulate API call (for prototype)
         setTimeout(() => {
-          fetch(scriptURL, { method: 'POST', body: formData }).then(
-            response => {
-              console.log(response.status)
-              console.log(response)
-            }
-          )
+          fetch(scriptURL, {
+              method: 'POST',
+              mode: 'cors', // Đảm bảo có 'mode: "cors"'
+              headers: {
+                  'Content-Type': 'application/json' // Quan trọng nếu bạn gửi JSON
+                  // Không thêm header 'Origin' thủ công, trình duyệt sẽ tự thêm.
+              },
+              body: JSON.stringify(formData)
+          })
+          .then(response => {
+              // Kiểm tra response.ok để xem mã trạng thái HTTP có nằm trong khoảng 200-299 không
+              if (!response.ok) {
+                  // Nếu server trả về lỗi (ví dụ: 400, 500)
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json(); // Hoặc response.text() nếu script trả về text thuần
+          })
+          .then(data => {
+              console.log('Success:', data);
+          })
+          .catch(error => {
+              console.error('Error during fetch operation:', error); // Lỗi "Failed to fetch" sẽ xuất hiện ở đây
+          });
           // Show success message
           formStatus.innerHTML = '<div class="alert alert-success" role="alert">Your message has been sent successfully! I will get back to you soon.</div>';
           
