@@ -1637,10 +1637,8 @@
         setTimeout(() => {
           fetch(scriptURL, {
               method: 'POST',
-              mode: 'cors', // Đảm bảo có 'mode: "cors"'
               headers: {
-                  'Content-Type': 'application/json' // Quan trọng nếu bạn gửi JSON
-                  // Không thêm header 'Origin' thủ công, trình duyệt sẽ tự thêm.
+                  'Content-Type': 'application/json'
               },
               body: JSON.stringify(formData)
           })
