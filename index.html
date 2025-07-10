@@ -1625,10 +1625,10 @@
         e.preventDefault();
         // const form = event.target;
         const formData = new FormData(contactForm); // Tạo đối tượng FormData từ form
-        // Lặp qua các cặp key-value trong FormData
-        for (let [name, value] of formData.entries()) {
-          console.log(`${name}: ${value}`);
-        }
+        // // Lặp qua các cặp key-value trong FormData
+        // for (let [name, value] of formData.entries()) {
+        //   console.log(`${name}: ${value}`);
+        // }
         
         // Validate form
         if (!validateForm()) {
@@ -1648,12 +1648,13 @@
               }
               return response.json(); // Hoặc response.text() nếu script trả về text thuần
           }).then(data => {
-              console.log('Success:', data);
+              // Show success message
+              formStatus.innerHTML = '<div class="alert alert-success" role="alert">'+ data.response.message +'</div>';
           }).catch(error => {
+              // Show error message
+              formStatus.innerHTML = '<div class="alert alert-error" role="alert">'+ data.response.message +'</div>';
               console.error('Error during fetch operation:', error); // Lỗi "Failed to fetch" sẽ xuất hiện ở đây
           });
-          // Show success message
-          formStatus.innerHTML = '<div class="alert alert-success" role="alert">Your message has been sent successfully! I will get back to you soon.</div>';
           
           // Clear form and local storage
           contactForm.reset();
