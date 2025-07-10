@@ -1,450 +1,1706 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Tester & IT BA Portfolio</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://drive.google.com/thumbnail?id=1vAyy4ozNHFdCYJngfGKe6cVcO-mV74Nh">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --dark: #1e1b4b;
-            --light: #f8fafc;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-        }
-        
-        .tech-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -1;
-            background: linear-gradient(rgba(30, 27, 75, 0.9), rgba(30, 27, 75, 0.9)), 
-                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e5ffc49-7fd2-41f2-bc98-1f74cc26a3be.png') center/cover no-repeat;
-        }
-        
-        .tech-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent, rgba(37, 99, 235, 0.1));
-            animation: pulse 15s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.05); opacity: 0.5; }
-        }
-        
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .slide-in {
-            animation: slideIn 1s ease-out forwards;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card {
-            transition: all 0.3s ease;
-        }
-        
-        .carousel-item {
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .carousel-item.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .carousel-item.inactive {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        
-        .glow-on-hover:hover {
-            box-shadow: 0 0 15px rgba(37, 99, 235, 0.7);
-        }
-        
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-            }
-            
-            .profile-card {
-                margin-bottom: 2rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minh An - QA Engineer & IT Business Analyst Portfolio</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://drive.google.com/thumbnail?id=1vAyy4ozNHFdCYJngfGKe6cVcO-mV74Nh">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <style id="app-style">
+    :root {
+      --primary-color: #4a6fa5;
+      --secondary-color: #334e68;
+      --accent-color: #4caf93;
+      --text-color: #333;
+      --light-bg: #f8f9fa;
+      --dark-bg: #243b53;
+      --border-radius: 8px;
+      --font-family-sans: 'Poppins', sans-serif;
+      --font-family-serif: 'Merriweather', serif;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: var(--font-family-sans);
+      color: var(--text-color);
+      position: relative;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body.serif-font {
+      font-family: var(--font-family-serif);
+    }
+
+    body.professional-theme {
+      --primary-color: #2c3e50;
+      --secondary-color: #34495e;
+      --accent-color: #3498db;
+    }
+
+    .navbar {
+      transition: var(--transition);
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary-color);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: var(--text-color);
+      margin: 0 10px;
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link:focus {
+      color: var(--primary-color);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    #hero {
+      background: linear-gradient(135deg, rgba(74, 111, 165, 0.1) 0%, rgba(76, 175, 147, 0.1) 100%);
+      padding: 120px 0 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-img-container {
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 5px solid #fff;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--secondary-color);
+    }
+
+    .typed-text {
+      color: var(--accent-color);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      color: var(--text-color);
+    }
+
+    .btn-custom {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 30px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      margin: 0 5px;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+
+    .section-heading {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-heading h2 {
+      font-weight: 700;
+      color: var(--secondary-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading h2:after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background-color: var(--accent-color);
+      bottom: -15px;
+      left: 0;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    .bg-light-section {
+      background-color: var(--light-bg);
+    }
+
+    .skill-item {
+      background-color: white;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(74, 111, 165, 0.1);
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .skill-icon i {
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+
+    .skill-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--secondary-color);
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      margin-bottom: 30px;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 25px;
+      background-color: white;
+    }
+
+    .project-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+
+    .project-tag {
+      display: inline-block;
+      background-color: rgba(74, 111, 165, 0.1);
+      color: var(--primary-color);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .project-modal .modal-content {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    .project-modal .modal-header {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .project-modal .btn-close {
+      color: white;
+      background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline:before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      padding: 20px 40px;
+      position: relative;
+      width: 50%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      padding: 30px;
+      background-color: white;
+      position: relative;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content:before {
+      content: '';
+      position: absolute;
+      border: 10px solid transparent;
+      border-left-color: white;
+      right: -20px;
+      top: 30px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content:before {
+      content: '';
+      position: absolute;
+      border: 10px solid transparent;
+      border-right-color: white;
+      left: -20px;
+      top: 30px;
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid white;
+    }
+
+    .timeline-date {
+      display: inline-block;
+      color: white;
+      background-color: var(--accent-color);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+
+    .timeline-company {
+      font-style: italic;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .cert-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .cert-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(74, 111, 165, 0.1);
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .cert-icon i {
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+
+    .cert-info {
+      flex: 1;
+    }
+
+    .cert-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--secondary-color);
+    }
+
+    .cert-issuer {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .cert-date {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .contact-form-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control {
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.2rem rgba(76, 175, 147, 0.25);
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+
+    .contact-info {
+      margin-top: 30px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(74, 111, 165, 0.1);
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .contact-icon i {
+      font-size: 20px;
+      color: var(--primary-color);
+    }
+
+    .draft-indicator {
+      font-size: 0.8rem;
+      color: #6c757d;
+      font-style: italic;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+    }
+
+    .spinner-border {
+      color: var(--primary-color);
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      padding: 60px 0 30px;
+      color: white;
+    }
+
+    .footer-heading {
+      font-weight: 600;
+      color: white;
+      margin-bottom: 25px;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-link:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-switcher {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-btn, .font-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .theme-btn:hover, .font-btn:hover,
+    .theme-btn.active, .font-btn.active {
+      background-color: var(--accent-color);
+    }
+
+    @media (max-width: 991px) {
+      .hero-content {
+        text-align: center;
+      }
+      
+      #hero {
+        padding: 100px 0 60px;
+      }
+      
+      .hero-img-container {
+        margin-bottom: 40px;
+        width: 250px;
+        height: 250px;
+      }
+      
+      .timeline:before {
+        left: 40px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 80px;
+        padding-right: 15px;
+      }
+      
+      .timeline-item:nth-child(odd) {
+        text-align: left;
+      }
+      
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+      
+      .timeline-dot {
+        left: 40px;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content:before {
+        left: -20px;
+        right: auto;
+        border-right-color: white;
+        border-left-color: transparent;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-padding {
+        padding: 70px 0;
+      }
+      
+      .cert-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cert-icon {
+        margin-bottom: 15px;
+        margin-right: 0;
+      }
+    }
+    
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-up {
+      animation: fade-up 0.6s ease forwards;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+  </style>
 </head>
 <body>
-    <div class="tech-bg"></div>
-    
-    <div class="container mx-auto px-4 py-12 md:py-24">
-        <!-- Hero Section -->
-        <section class="text-center mb-20 slide-in">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-                    Professional Tester & IT Business Analyst
-                </span>
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto">
-                Bridging the gap between technical excellence and business objectives through systematic testing and analytical solutions.
-            </p>
-        </section>
-        
-        <!-- Profile Section -->
-        <section class="flex flex-col md:flex-row gap-8 mb-20 profile-section">
-            <!-- Profile Card -->
-            <div class="w-full md:w-1/3 bg-white/10 backdrop-blur-lg rounded-xl p-8 card profile-card glow-on-hover">
-                <div class="flex flex-col items-center">
-                    <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-500 mb-6 floating">
-                        <img src="https://drive.google.com/thumbnail?id=1ac46Pd2p6WGdaTxui6IhSHEWEhELa3Td" alt="Professional portrait of a male IT business analyst in formal attire with a confident expression" class="w-full h-full object-cover">
-                    </div>
-                    
-                    <h2 class="text-2xl font-bold text-white mb-2">Minh An</h2>
-                    <p class="text-blue-300 mb-6">Junior Tester & IT Business Analyst</p>
-                    
-                    <div class="w-full space-y-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-graduation-cap text-blue-400 mt-1 mr-3"></i>
-                            <div>
-                                <h4 class="font-semibold text-white">Education</h4>
-                                <p class="text-blue-200">Sai Gon University</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <i class="fas fa-briefcase text-blue-400 mt-1 mr-3"></i>
-                            <div>
-                                <h4 class="font-semibold text-white">Experience</h4>
-                                <p class="text-blue-200">3+ years in Software Testing & Business Analysis</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <i class="fas fa-venus-mars text-blue-400 mt-1 mr-3"></i>
-                            <div>
-                                <h4 class="font-semibold text-white">Gender</h4>
-                                <p class="text-blue-200">Male</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <i class="fas fa-home text-blue-400 mt-1 mr-3"></i>
-                            <div>
-                                <h4 class="font-semibold text-white">Hometown</h4>
-                                <p class="text-blue-200">Ben Tre, Vinh Long City</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex space-x-4 mt-6">
-                        <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
-                            <i class="fab fa-linkedin-in text-white"></i>
-                        </a>
-                        <a href="https://github.com/ISFLA5H" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
-                            <i class="fab fa-github text-white"></i>
-                        </a>
-                        <a href="mailto:minhan24122018@gmail.com" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
-                            <i class="fas fa-envelope text-white"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Projects Carousel -->
-            <div class="w-full md:w-2/3 relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-lg p-6">
-                <h3 class="text-2xl font-bold text-white mb-6">My Projects & Work</h3>
-                
-                <div class="relative h-64 md:h-80 overflow-hidden rounded-lg">
-                    <!-- Carousel Items -->
-                    <div class="carousel-item active absolute inset-0">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/20b1206f-0119-4033-836d-569c297d2ed1.png" alt="Dashboard interface showing test cases and results for a banking application project" class="w-full h-full object-cover rounded-lg">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <h4 class="text-white font-semibold text-lg">TMS System Testing</h4>
-                            <p class="text-blue-200">Comprehensive testing solution implemented for a major TSM client</p>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-item inactive absolute inset-0">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9d6ebf16-133e-40fa-8cdb-2e46e3b664ae.png" alt="Team collaboration in an agile environment with digital boards for project management" class="w-full h-full object-cover rounded-lg">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <h4 class="text-white font-semibold text-lg">Agile BA Implementation</h4>
-                            <p class="text-blue-200">Transitioned client from waterfall to agile with full requirements analysis</p>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-item inactive absolute inset-0">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e001f52e-91c8-4c16-81ff-d2b79b55a8ca.png" alt="System architecture diagram with components connected showing complex enterprise solution" class="w-full h-full object-cover rounded-lg">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <h4 class="text-white font-semibold text-lg">Warehouse & Warranty System Analysis</h4>
-                            <p class="text-blue-200">Led requirements gathering and analysis for enterprise Warehouse & Warranty implementation</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Carousel Controls -->
-                    <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/50 transition">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/50 transition">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    
-                    <!-- Indicators -->
-                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
-                        <div class="w-3 h-3 rounded-full bg-white/30"></div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
-                        <h4 class="text-white font-semibold">Test Automation</h4>
-                        <p class="text-blue-200 text-sm">Built frameworks for 50+ automated test cases</p>
-                    </div>
-                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
-                        <h4 class="text-white font-semibold">Requirements Analysis</h4>
-                        <p class="text-blue-200 text-sm">Gathered 200+ business requirements</p>
-                    </div>
-                    <div class="bg-white/5 hover:bg-white/10 p-4 rounded-lg transition cursor-pointer">
-                        <h4 class="text-white font-semibold">Process Optimization</h4>
-                        <p class="text-blue-200 text-sm">Improved SDLC efficiency by 35%</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Skills Section -->
-        <section class="mb-20 slide-in" style="animation-delay: 0.2s;">
-            <h2 class="text-3xl font-bold text-white mb-8 text-center">Technical Expertise</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-check-circle text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Test Automation</h3>
-                    <p class="text-blue-200 text-sm">Selenium, Cypress, Playwrite, Katalon</p>
-                </div>
-                
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-project-diagram text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Business Analysis</h3>
-                    <p class="text-blue-200 text-sm">JIRA, Confluence, BPMN, UML, BRD, FRS, Figma</p>
-                </div>
-                
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-code text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Programming</h3>
-                    <p class="text-blue-200 text-sm">PHP, Python, SQL, JavaScript</p>
-                </div>
-                
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-cloud text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Using AI In Work</h3>
-                    <p class="text-blue-200 text-sm">ChatGPT, Gemini, Blackbox.ai, Claude</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Testimonials -->
-<!--         <section class="slide-in" style="animation-delay: 0.4s;">
-            <h2 class="text-3xl font-bold text-white mb-8 text-center">Client Testimonials</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3f597f1-b805-4f51-b395-bd6a76683b6d.png" alt="Portrait of a satisfied client, male executive in business suit" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-white">Michael Johnson</h4>
-                            <p class="text-blue-200 text-sm">CTO, TechSolutions Inc.</p>
-                        </div>
-                    </div>
-                    <p class="text-blue-200 italic">"His attention to detail in requirements analysis saved our project from multiple pitfalls during implementation."</p>
-                </div>
-                
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26f70297-2a74-4999-80cc-c255a8473acb.png" alt="Portrait of a satisfied client, female director smiling" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-white">Sarah Williams</h4>
-                            <p class="text-blue-200 text-sm">Product Director, FinTech Corp</p>
-                        </div>
-                    </div>
-                    <p class="text-blue-200 italic">"The test automation framework he built reduced our regression testing time by 70%."</p>
-                </div>
-                
-                <div class="bg-white/5 backdrop-blur-lg p-6 rounded-xl card glow-on-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9a9f853-5933-4420-9b28-56210fbd1982.png" alt="Portrait of a satisfied client, senior manager with glasses" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-white">David Chen</h4>
-                            <p class="text-blue-200 text-sm">Senior Manager, BankGlobal</p>
-                        </div>
-                    </div>
-                    <p class="text-blue-200 italic">"His ability to bridge technical and business perspectives was instrumental in our project's success."</p>
-                </div>
-            </div>
-        </section> -->
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">Minh An</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#certifications">Certifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    
-    <footer class="bg-black/20 py-8 text-center">
-        <div class="container mx-auto px-4">
-            <p class="text-blue-300">© <span id="year"></span> Professional Tester & IT Business Analyst Portfolio</p>
-            <p class="text-blue-400/70 text-sm mt-2">Crafted with expertise in testing and business analysis</p>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="hero-img-container" data-aos="fade-right">
+            <img src="https://drive.google.com/thumbnail?id=1ac46Pd2p6WGdaTxui6IhSHEWEhELa3Td" alt="Minh An" class="hero-img">
+          </div>
         </div>
-    </footer>
-    
-    <script>
-        // get current year
-          // Lấy thẻ span có id là "currentYear"
-          const currentYearSpan = document.getElementById('year');
+        <div class="col-lg-7">
+          <div class="hero-content" data-aos="fade-left">
+            <h1>Hi, I'm Minh An</h1>
+            <h2 class="mb-4">
+              <span class="typed-text">QA Engineer & IT Business Analyst</span>
+            </h2>
+            <p>I bridge the gap between technical requirements and business needs with over 3+ years of experience in quality assurance and business analysis. My expertise lies in ensuring software meets both technical standards and user expectations through comprehensive testing strategies and clear requirement documentation.</p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="#contact" class="btn btn-custom">Get In Touch</a>
+              <a href="#projects" class="btn btn-outline-secondary">View My Work</a>
+            </div>
+            <div class="social-links mt-4">
+              <a href="javascript:void(0)" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/ISFLA5H" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="javascript:void(0)" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="mailto:minhan24122018@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          // Tạo một đối tượng Date mới
-          const today = new Date();
+  <!-- Skills Section -->
+  <section id="skills" class="section-padding bg-light-section">
+    <div class="container">
+      <div class="section-heading text-center" data-aos="fade-up">
+        <h2>My Skills & Expertise</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-bug"></i>
+            </div>
+            <h3 class="skill-title">Test Automation</h3>
+            <p>Expert in creating and maintaining automated test frameworks with Selenium, Cypress, and PlayWrite. Strong knowledge of test-driven development practices and continuous integration.</p>
+            <div class="mt-3">
+              <span class="project-tag">Selenium</span>
+              <span class="project-tag">Cypress</span>
+              <span class="project-tag">PlayWrite</span>
+              <span class="project-tag">Katalon</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h3 class="skill-title">Business Analysis</h3>
+            <p>Skilled in gathering and analyzing business requirements, creating user stories, and translating complex business needs into technical specifications that guide development teams.</p>
+            <div class="mt-3">
+              <span class="project-tag">Requirements Gathering</span>
+              <span class="project-tag">JIRA</span>
+              <span class="project-tag">User Stories</span>
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">Draw.io</span>  
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="skill-title">Test Strategy</h3>
+            <p>Experience in designing comprehensive test strategies, test plans, and test cases to ensure thorough coverage and risk-based testing for web and mobile applications.</p>
+            <div class="mt-3">
+              <span class="project-tag">Test Planning</span>
+              <span class="project-tag">Test Management</span>
+              <span class="project-tag">Risk Analysis</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="skill-title">SQL & Database Testing</h3>
+            <p>Proficient in writing complex SQL queries for data validation, database testing, and creating test data to support testing scenarios and edge cases.</p>
+            <div class="mt-3">
+              <span class="project-tag">SQL</span>
+              <span class="project-tag">Oracle</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="skill-title">Mobile Testing</h3>
+            <p>Experience in testing mobile applications across iOS and Android platforms, including manual testing and device compatibility testing.</p>
+            <div class="mt-3">
+              <span class="project-tag">Manual Test</span>
+              <span class="project-tag">Device Farms</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="skill-item">
+            <div class="skill-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="skill-title">Team Collaboration</h3>
+            <p>Strong communicator who bridges the gap between technical and non-technical stakeholders. Experienced in Agile methodologies and cross-functional team collaboration.</p>
+            <div class="mt-3">
+              <span class="project-tag">Agile</span>
+              <span class="project-tag">Scrum</span>
+              <span class="project-tag">Stakeholder Management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          // Lấy năm từ đối tượng Date
-          const year = today.getFullYear();
+  <!-- Projects Section -->
+  <section id="projects" class="section-padding">
+    <div class="container">
+      <div class="section-heading text-center" data-aos="fade-up">
+        <h2>Featured Projects</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2016/11/19/14/16/mobile-phone-1839539_1280.jpg" alt="E-commerce Platform Migration" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">TMS Systems</h4>
+              <p>QA testing for a major TMS Systems, reducing post-launch bugs by 87% compared to previous releases.</p>
+              <div class="mb-3">
+                <span class="project-tag">TSM</span>
+                <span class="project-tag">Selenium</span>
+                <span class="project-tag">API Testing</span>
+                <span class="project-tag">Database Testing</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal1">View Details</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2018/03/27/12/16/analytics-3265840_1280.jpg" alt="Financial Reporting System" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">Financial Reporting System</h4>
+              <p>Created comprehensive test strategy for a regulatory compliance reporting system, achieving 99.8% accuracy in data processing.</p>
+              <div class="mb-3">
+                <span class="project-tag">Financial</span>
+                <span class="project-tag">Database Testing</span>
+                <span class="project-tag">Compliance</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal2">View Details</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2017/07/31/11/46/laptop-2557576_1280.jpg" alt="Healthcare Patient Portal" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">Warehouse & Warranty Portal</h4>
+              <p>Gathered requirements and led testing for a Warehouse & Warranty portal, improving user experience scores by 72%.</p>
+              <div class="mb-3">
+                <span class="project-tag">Warehouse & Warranty</span>
+                <span class="project-tag">Workflow Testing</span>
+                <span class="project-tag">UI/UX Testing</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal3">View Details</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2016/12/19/08/39/mobile-phone-1917737_1280.jpg" alt="Mobile Banking App" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">Mobile Tan Tam App</h4>
+              <p>Managed end-to-end testing of a mobile Tan Tam application across iOS and Android, focusing on security and performance.</p>
+              <div class="mb-3">
+                <span class="project-tag">Mobile</span>
+                <span class="project-tag">Manual Testing</span>
+                <span class="project-tag">UI-UX Testing</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal4">View Details</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2019/09/22/16/20/backend-4496461_1280.png" alt="API Integration Platform" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">API Integration Platform</h4>
+              <p>Developed automated API testing framework for a multi-partner integration platform, reducing testing cycle time by 65%.</p>
+              <div class="mb-3">
+                <span class="project-tag">API</span>
+                <span class="project-tag">Postman</span>
+                <span class="project-tag">CI/CD</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal5">View Details</button>
+            </div>
+          </div>
+        </div>
+<!--         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="project-card">
+            <img src="https://cdn.pixabay.com/photo/2018/06/08/00/48/developer-3461405_1280.png" alt="DevOps Automation Pipeline" class="project-img">
+            <div class="project-content">
+              <h4 class="project-title">DevOps Automation Pipeline</h4>
+              <p>Created requirements and test strategy for a new CI/CD pipeline, improving deployment reliability and reducing time-to-market.</p>
+              <div class="mb-3">
+                <span class="project-tag">DevOps</span>
+                <span class="project-tag">Jenkins</span>
+                <span class="project-tag">Test Automation</span>
+              </div>
+              <button class="btn btn-custom btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal6">View Details</button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
 
-          // Gán năm vào nội dung của thẻ span
-          currentYearSpan.textContent = year;
-        // Auto-sliding Carousel
-        document.addEventListener('DOMContentLoaded', function() {
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            const indicators = document.querySelectorAll('.carousel-indicators div');
-            let currentIndex = 0;
-            
-            // Initialize first item as active
-            updateCarousel();
-            
-            // Auto slide every 3 seconds
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                updateCarousel();
-            }, 3000);
-            
-            // Previous button
-            document.querySelector('.carousel-prev').addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                updateCarousel();
-            });
-            
-            // Next button
-            document.querySelector('.carousel-next').addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                updateCarousel();
-            });
-            
-            // Indicator clicks
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-            
-            function updateCarousel() {
-                // Update items
-                carouselItems.forEach((item, index) => {
-                    if (index === currentIndex) {
-                        item.classList.add('active');
-                        item.classList.remove('inactive');
-                    } else {
-                        item.classList.add('inactive');
-                        item.classList.remove('active');
-                    }
-                });
-                
-                // Update indicators
-                indicators.forEach((indicator, index) => {
-                    if (index === currentIndex) {
-                        indicator.classList.add('bg-blue-500');
-                        indicator.classList.remove('bg-white/30');
-                    } else {
-                        indicator.classList.add('bg-white/30');
-                        indicator.classList.remove('bg-blue-500');
-                    }
-                });
-            }
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Animation on scroll
-            const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.slide-in');
-                elements.forEach(el => {
-                    const elementPosition = el.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.2;
-                    
-                    if (elementPosition < screenPosition) {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateX(0)';
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll(); // Initialize
+  <!-- Experience Section -->
+  <section id="experience" class="section-padding bg-light-section">
+    <div class="container">
+      <div class="section-heading text-center" data-aos="fade-up">
+        <h2>Work Experience</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-content">
+            <span class="timeline-date">06/2025 - 08/2025</span>
+            <h4 class="timeline-title">IT Business Analyst</h4>
+            <p class="timeline-company">Global Retail Solutions</p>
+            <ul>
+              <li>Use Figma to create a wireframe.</li>
+              <li>Create documentation outlining the back office and end user BRD and FRS functionalities.</li>
+              <li>Collaborate with stakeholders to define needs and resolve problems.</li>
+              <li>To finish the project on time, collaborate with the tester and follow up with the developer and PM.</li>
+              <li>Gathered and documented business requirements for e-commerce platform enhancements</li>
+              <li>Created detailed user stories and acceptance criteria for development teams</li>
+              <li>Conducted user acceptance testing and collected feedback for product improvements</li>
+              <li>Served as liaison between technical teams and business stakeholders</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-content">
+            <span class="timeline-date">2021 - 2023</span>
+            <h4 class="timeline-title">QA Engineer</h4>
+            <p class="timeline-company">TMS Systems And Warehouse & Warranty Systems</p>
+            <ul>
+              <li>Performed manual and automated testing for TSM applications</li>
+              <li>Developed and executed test plans for major product releases</li>
+              <li>Collaborated with business stakeholders to clarify requirements and document use cases</li>
+              <li>Identified and tracked defects through resolution, maintaining 98% on-time delivery</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+<!--         <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-content">
+            <span class="timeline-date">2016 - 2018</span>
+            <h4 class="timeline-title">IT Business Analyst</h4>
+            <p class="timeline-company">Global Retail Solutions</p>
+            <ul>
+              <li>Gathered and documented business requirements for e-commerce platform enhancements</li>
+              <li>Created detailed user stories and acceptance criteria for development teams</li>
+              <li>Conducted user acceptance testing and collected feedback for product improvements</li>
+              <li>Served as liaison between technical teams and business stakeholders</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+        </div> -->
+<!--         <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-content">
+            <span class="timeline-date">2014 - 2016</span>
+            <h4 class="timeline-title">Junior QA Tester</h4>
+            <p class="timeline-company">Software Innovations Ltd</p>
+            <ul>
+              <li>Executed manual test cases for web and mobile applications</li>
+              <li>Documented and reported bugs in tracking system</li>
+              <li>Participated in daily stand-ups and sprint planning</li>
+              <li>Supported regression testing for bi-weekly releases</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="section-padding">
+    <div class="container">
+      <div class="section-heading text-center" data-aos="fade-up">
+        <h2>Certifications & Education</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-up">
+<!--           <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">ISTQB Certified Test Manager</h4>
+              <p class="cert-issuer">International Software Testing Qualifications Board</p>
+              <p class="cert-date">2020</p>
+            </div>
+          </div> -->
+<!--           <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">Certified Scrum Product Owner (CSPO)</h4>
+              <p class="cert-issuer">Scrum Alliance</p>
+              <p class="cert-date">2019</p>
+            </div>
+          </div> -->
+          <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">TOEIC Certified</h4>
+              <p class="cert-issuer">575 Point</p>
+              <p class="cert-date">2024</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+<!--           <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">Master of Science, Information Technology</h4>
+              <p class="cert-issuer">University of Technology</p>
+              <p class="cert-date">2024</p>
+            </div>
+          </div> -->
+          <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">Bachelor of Information Technology, Software Engineering</h4>
+              <p class="cert-issuer">Sai Gon University</p>
+              <p class="cert-date">2024</p>
+            </div>
+          </div>
+<!--           <div class="cert-item">
+            <div class="cert-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-info">
+              <h4 class="cert-title">Selenium WebDriver with Java</h4>
+              <p class="cert-issuer">Test Automation University</p>
+              <p class="cert-date">2018</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-padding bg-light-section">
+    <div class="container">
+      <div class="section-heading text-center" data-aos="fade-up">
+        <h2>Get In Touch</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-up">
+          <div class="contact-form-container">
+            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbwziNLj2SxQWSfb0PSVizXTQ57c9LAsdiFR2JZA4nGuZahx4e7MgLmRFo82AwU7AVz5Cg/exec">
+              <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="Email" placeholder="Enter your email" required>
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="Subject" placeholder="Enter subject">
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="Message" rows="5" placeholder="Enter your message" required></textarea>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="submit" class="btn btn-custom">Send Message</button>
+                <span class="draft-indicator" id="draftIndicator" style="display: none;">Draft saved</span>
+              </div>
+              <div id="formStatus" class="mt-3"></div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="ps-lg-4">
+            <h3 class="mb-4">Let's discuss your project</h3>
+            <p class="mb-4">I'm interested in challenging projects that require a combination of technical testing expertise and business analysis skills. Whether you're looking for a consultant or a full-time team member, I'd love to hear from you.</p>
+            <div class="contact-info">
+              <div class="contact-info-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h5>Location</h5>
+                  <p>District 7, Ho Chi Minh Cty</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h5>Email</h5>
+                  <p>minhan24122018@gmail.com</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div>
+                  <h5>Phone</h5>
+                  <p>+84 898 434 962</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="footer-heading">About Me</h5>
+          <p>Experienced QA Engineer and IT Business Analyst with a passion for delivering high-quality software that meets business needs and exceeds user expectations.</p>
+          <div class="social-links mt-4">
+            <a href="javascript:void(0)" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/ISFLA5H" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="javascript:void(0)" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:minhan24122018@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#hero" class="footer-link">Home</a></li>
+            <li><a href="#skills" class="footer-link">Skills</a></li>
+            <li><a href="#projects" class="footer-link">Projects</a></li>
+            <li><a href="#experience" class="footer-link">Experience</a></li>
+            <li><a href="#certifications" class="footer-link">Certifications</a></li>
+            <li><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-heading">Customize</h5>
+          <p>Choose your preferred theme and font:</p>
+          <div class="theme-switcher mb-3">
+            <button id="modernTheme" class="theme-btn active">Modern Theme</button>
+            <button id="professionalTheme" class="theme-btn">Professional Theme</button>
+          </div>
+          <div class="theme-switcher">
+            <button id="sansFont" class="font-btn active">Sans-serif Font</button>
+            <button id="serifFont" class="font-btn">Serif Font</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; <span id="year"></span> Sarah Chen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Project Modals -->
+  <div class="modal fade project-modal" id="projectModal1" tabindex="-1" aria-labelledby="projectModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal1Label">TMS Systems</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2016/11/19/14/16/mobile-phone-1839539_1280.jpg" alt="TMS Systems" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Led the QA effort for a major TMS Systems from a legacy system to a modern microservices architecture.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Developed comprehensive test strategy covering functional, non-functional, and API testing</li>
+                <li>Created automated test suite using Selenium and RestAssured for API testing</li>
+                <li>Coordinated with business stakeholders to define acceptance criteria</li>
+                <li>Managed defect triage process and coordinated fix verification</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">Selenium</span>
+                <span class="project-tag">Trello</span>
+                <span class="project-tag">Postman</span>
+                <span class="project-tag">Oracle Database</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Reduced post-launch bugs by 87% compared to previous releases. The automated test suite achieved 92% test coverage and reduced regression testing time from 2 weeks to 3 days.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="projectModal2" tabindex="-1" aria-labelledby="projectModal2Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal2Label">Financial Reporting System</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2018/03/27/12/16/analytics-3265840_1280.jpg" alt="Financial Reporting System" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Created a comprehensive test strategy for a regulatory compliance reporting system used by financial institutions for government reporting.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Designed test approach focusing on data accuracy and regulatory compliance</li>
+                <li>Developed SQL test scripts for data verification and reconciliation</li>
+                <li>Created detailed test scenarios for complex financial calculations</li>
+                <li>Collaborated with compliance team to ensure regulatory requirements were met</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">SQL</span>
+                <span class="project-tag">Oracle DB</span>
+                <span class="project-tag">PowerBI</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Achieved 99.8% accuracy in data processing and reporting. The system passed regulatory audit with zero compliance findings, saving the organization potential regulatory fines.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="projectModal3" tabindex="-1" aria-labelledby="projectModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal3Label">Warehouse & Warranty Portal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2017/07/31/11/46/laptop-2557576_1280.jpg" alt="Healthcare Patient Portal" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Gathered requirements and led testing for a Warehouse & Warranty portal allowing patients to access medical records, schedule appointments, and communicate with providers.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Facilitated requirements gathering workshops with Warranty providers and user</li>
+                <li>Created user stories and acceptance criteria for development team</li>
+                <li>Led security and compliance testing efforts</li>
+                <li>Conducted usability testing with focus groups</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">Trello</span>
+                <span class="project-tag">Postman</span>
+                <span class="project-tag">Oracle DB</span>
+                <span class="project-tag">Mongo DB</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Improved user experience scores by 42% over previous portal. Reduced call center volume by 35% as user could self-serve through the portal.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="projectModal4" tabindex="-1" aria-labelledby="projectModal4Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal4Label">Tan Tam App</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2016/12/19/08/39/mobile-phone-1917737_1280.jpg" alt="Mobile Tan Tam App" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Managed end-to-end testing of a mobile Tan Tam application across iOS and Android platforms, focusing on security features and performance optimization.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Designed test strategy covering both platforms and multiple device types</li>
+                <li>Built Appium automation framework for cross-platform testing</li>
+                <li>Implemented security testing focusing on authentication and data encryption</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">Trello</span>
+                <span class="project-tag">BrowserStack</span>
+                <span class="project-tag">Charles Proxy</span>
+                <span class="project-tag">OWASP Mobile Top 10</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Achieved 99.7% app stability across 42 device/OS combinations. Identified and helped resolve critical security vulnerabilities before launch. Reduced app loading time by 40%.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="projectModal5" tabindex="-1" aria-labelledby="projectModal5Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal5Label">API Integration Platform</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2019/09/22/16/20/backend-4496461_1280.png" alt="API Integration Platform" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Developed an automated API testing framework for a multi-partner integration platform that connects with over 50 third-party services.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Designed API test architecture and implemented contract testing</li>
+                <li>Created mock services for third-party API testing</li>
+                <li>Implemented data validation and error handling test scenarios</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">Postman</span>
+                <span class="project-tag">Swagger</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Reduced testing cycle time by 65%. Increased API test coverage from 45% to 92%. Implemented early detection of integration issues, preventing 20+ potential production outages.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="projectModal6" tabindex="-1" aria-labelledby="projectModal6Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectModal6Label">DevOps Automation Pipeline</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="https://cdn.pixabay.com/photo/2018/06/08/00/48/developer-3461405_1280.png" alt="DevOps Automation Pipeline" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <h5>Project Overview</h5>
+              <p>Created requirements and test strategy for a new CI/CD pipeline, improving deployment reliability and reducing time-to-market.</p>
+              
+              <h5 class="mt-4">Responsibilities</h5>
+              <ul>
+                <li>Gathered requirements from development, operations, and security teams</li>
+                <li>Designed testing approach for pipeline validation</li>
+                <li>Implemented automated quality gates within the pipeline</li>
+                <li>Created dashboards for deployment health metrics</li>
+              </ul>
+              
+              <h5 class="mt-4">Technologies Used</h5>
+              <div>
+                <span class="project-tag">Jenkins</span>
+                <span class="project-tag">Docker</span>
+                <span class="project-tag">SonarQube</span>
+                <span class="project-tag">Artifactory</span>
+                <span class="project-tag">Grafana</span>
+              </div>
+              
+              <h5 class="mt-4">Results</h5>
+              <p>Reduced deployment time from 2 days to 2 hours. Decreased deployment failures by 78%. Improved mean time to recovery from 4 hours to 30 minutes. Increased deployment frequency from bi-weekly to daily.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script id="app-script">
+    // Initialize AOS animations
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+
+      // Lấy thẻ span có id là "year"
+      const currentYearSpan = document.getElementById('year');
+
+      // Tạo một đối tượng Date mới
+      const today = new Date();
+
+      // Lấy năm từ đối tượng Date
+      const year = today.getFullYear();
+
+      // Gán năm vào nội dung của thẻ span
+      currentYearSpan.textContent = year;
+      
+      // Navigation active state based on scroll position
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      function updateNavigation() {
+        let currentSection = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.clientHeight;
+          if(window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+          }
         });
-    </script>
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if(link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', updateNavigation);
+      
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Back to top button
+      const backToTop = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+      
+      backToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Theme switcher
+      const modernThemeBtn = document.getElementById('modernTheme');
+      const professionalThemeBtn = document.getElementById('professionalTheme');
+      
+      modernThemeBtn.addEventListener('click', function() {
+        document.body.classList.remove('professional-theme');
+        modernThemeBtn.classList.add('active');
+        professionalThemeBtn.classList.remove('active');
+        localStorage.setItem('theme', 'modern');
+      });
+      
+      professionalThemeBtn.addEventListener('click', function() {
+        document.body.classList.add('professional-theme');
+        professionalThemeBtn.classList.add('active');
+        modernThemeBtn.classList.remove('active');
+        localStorage.setItem('theme', 'professional');
+      });
+      
+      // Font switcher
+      const sansFontBtn = document.getElementById('sansFont');
+      const serifFontBtn = document.getElementById('serifFont');
+      
+      sansFontBtn.addEventListener('click', function() {
+        document.body.classList.remove('serif-font');
+        sansFontBtn.classList.add('active');
+        serifFontBtn.classList.remove('active');
+        localStorage.setItem('font', 'sans');
+      });
+      
+      serifFontBtn.addEventListener('click', function() {
+        document.body.classList.add('serif-font');
+        serifFontBtn.classList.add('active');
+        sansFontBtn.classList.remove('active');
+        localStorage.setItem('font', 'serif');
+      });
+      
+      // Load saved preferences
+      const savedTheme = localStorage.getItem('theme');
+      const savedFont = localStorage.getItem('font');
+      
+      if (savedTheme === 'professional') {
+        document.body.classList.add('professional-theme');
+        professionalThemeBtn.classList.add('active');
+        modernThemeBtn.classList.remove('active');
+      }
+      
+      if (savedFont === 'serif') {
+        document.body.classList.add('serif-font');
+        serifFontBtn.classList.add('active');
+        sansFontBtn.classList.remove('active');
+      }
+      
+      // Contact form handling
+      const contactForm = document.getElementById('contactForm');
+      const formStatus = document.getElementById('formStatus');
+      const draftIndicator = document.getElementById('draftIndicator');
+      
+      // Auto-save draft to local storage
+      const formInputs = contactForm.querySelectorAll('input, textarea');
+      
+      formInputs.forEach(input => {
+        // Load saved values
+        const savedValue = localStorage.getItem(`contact_${input.id}`);
+        if (savedValue) {
+          input.value = savedValue;
+        }
+        
+        // Save on change
+        input.addEventListener('input', function() {
+          localStorage.setItem(`contact_${input.id}`, this.value);
+          showDraftSaved();
+        });
+      });
+      
+      function showDraftSaved() {
+        draftIndicator.style.display = 'inline';
+        setTimeout(() => {
+          draftIndicator.style.display = 'none';
+        }, 2000);
+      }
+      
+      // Form submission
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (!validateForm()) {
+          return false;
+        }
+        
+        // Show loading spinner
+        formStatus.innerHTML = '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+        
+        // Simulate API call (for prototype)
+        setTimeout(() => {
+          // Show success message
+          formStatus.innerHTML = '<div class="alert alert-success" role="alert">Your message has been sent successfully! I will get back to you soon.</div>';
+          
+          // Clear form and local storage
+          contactForm.reset();
+          formInputs.forEach(input => {
+            localStorage.removeItem(`contact_${input.id}`);
+          });
+        }, 2000);
+      });
+      
+      // Form validation
+      function validateForm() {
+        let isValid = true;
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const message = document.getElementById('message');
+        
+        if (name.value.trim() === '') {
+          markInvalid(name, 'Name is required');
+          isValid = false;
+        } else {
+          markValid(name);
+        }
+        
+        if (email.value.trim() === '') {
+          markInvalid(email, 'Email is required');
+          isValid = false;
+        } else if (!isValidEmail(email.value)) {
+          markInvalid(email, 'Please enter a valid email address');
+          isValid = false;
+        } else {
+          markValid(email);
+        }
+        
+        if (message.value.trim() === '') {
+          markInvalid(message, 'Message is required');
+          isValid = false;
+        } else {
+          markValid(message);
+        }
+        
+        return isValid;
+      }
+      
+      function markInvalid(element, message) {
+        element.classList.add('is-invalid');
+        element.classList.remove('is-valid');
+        
+        let feedback = element.nextElementSibling;
+        if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+          feedback = document.createElement('div');
+          feedback.classList.add('invalid-feedback');
+          element.parentNode.appendChild(feedback);
+        }
+        feedback.textContent = message;
+      }
+      
+      function markValid(element) {
+        element.classList.remove('is-invalid');
+        element.classList.add('is-valid');
+      }
+      
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+    });
+  </script>
 </body>
 </html>
