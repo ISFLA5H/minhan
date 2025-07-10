@@ -1641,6 +1641,7 @@
                   // Nếu server trả về lỗi (ví dụ: 400, 500)
                   throw new Error(`HTTP error! Status: ${response.status}`);
               }
+              console.log(response.json());
               return response.json(); // Hoặc response.text() nếu script trả về text thuần
           }).then(data => {
               console.log('Success:', data);
